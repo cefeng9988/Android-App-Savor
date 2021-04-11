@@ -1,33 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="60dp">
 
 
+
     <Button
-        android:id="@+id/btnRecipeName"
+        android:id="@+id/btnRecipe"
         android:layout_width="160dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:backgroundTint="#AAAAAA"
         android:gravity="center"
         android:hint="Recipe Name"
-        android:backgroundTint="#AAAAAA"
         android:textColor="@color/black"
         android:textSize="30px" />
 
-    <TextView
-        android:id="@+id/txtUserReview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_vertical"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_weight="4"
-        android:gravity="center"
-        android:text="User Review"
-        android:textColor="#AAAAAA"
-        android:textSize="30px" />
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        tools:srcCompat="@tools:sample/avatars" />
 
 
 </LinearLayout>

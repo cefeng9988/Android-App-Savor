@@ -7,6 +7,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -31,6 +33,7 @@ public class ShoppingList extends AppCompatActivity {
     //input is 2D array for ingredient and boolean for if box has been checked or not
     String[][] listInput;
     String[] ingredients;
+    String[] empty;
 
     ArrayList<String> current_ingredients = new ArrayList<>();
 
@@ -88,6 +91,55 @@ public class ShoppingList extends AppCompatActivity {
             }
         });
     }
+
+
+// create menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+//        return super.onCreateOptionsMenu(menu);   //get rid of default behavior.
+
+        // Inflate the menu; this adds items to the action bar
+        getMenuInflater().inflate(R.menu.my_test_menu, menu);
+        return true;
+    }
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        if (id == R.id.mnu_zero) {
+            Intent intent = new Intent(ShoppingList.this, Spoonacular.class);
+            startActivity(intent);
+            return true;
+        }
+        if (id == R.id.mnu_one) {
+            Intent intent = new Intent(ShoppingList.this, Preferences.class);
+            startActivity(intent);
+            return true;
+        }
+        if (id == R.id.mnu_two) {
+            Intent intent = new Intent(ShoppingList.this, SavedRecipes.class);
+            startActivity(intent);
+            return true;
+        }
+        if (id == R.id.mnu_three) {
+            Intent intent = new Intent(ShoppingList.this, ShoppingList.class);
+            String[] array = {};
+            intent.putExtra("array", array);
+            startActivity(intent);
+            return true;
+        }
+        if (id == R.id.mnu_four) {
+            Intent intent = new Intent(ShoppingList.this, MacroTracker.class);
+            startActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);  //if none of the above are true, do the default and return a boolean.
+    }
+
 
     @Override
     protected void onDestroy() {

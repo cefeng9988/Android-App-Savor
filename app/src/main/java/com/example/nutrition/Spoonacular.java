@@ -3,9 +3,14 @@ package com.example.nutrition;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -35,6 +40,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Arrays;
+
+import javax.crypto.Mac;
+
 public class Spoonacular extends AppCompatActivity {
     private Button btnSubmit1, btnSubmit2, btnSave, btnLogout2, btnSavedRecipes;
     private EditText txtEdtKeyWords, txtEdtIngredients;
@@ -45,10 +54,6 @@ public class Spoonacular extends AppCompatActivity {
     private View[] listViews;
     private int recipeLength;
     Intent intent;
-
-    DatabaseReference firebase;
-    Recipe recipe;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,8 +80,6 @@ public class Spoonacular extends AppCompatActivity {
             }
         });
 
-        recipe = new Recipe();
-        firebase = FirebaseDatabase.getInstance().getReference().child("Recipe");
 
         // Submits user input for type of cuisine and outputs the recipes related to the cuisine
         btnSubmit1.setOnClickListener(new View.OnClickListener() {
@@ -108,18 +111,6 @@ public class Spoonacular extends AppCompatActivity {
             }
         });
 
-        // Saves the id, name, ingredients, and summary of the recipe to firebase
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                recipe.setID(txtRecipeID.getText().toString().trim());
-//                recipe.setName(txtRecipeName.getText().toString().trim());
-//                recipe.setIngredients(txtRecipeIngredients.getText().toString().trim());
-                recipe.setSummary(summary);
-                firebase.push().setValue(recipe);
-                Toast.makeText(getApplicationContext(), "Recipe Saved", Toast.LENGTH_LONG).show();
-            }
-        });
 
         // logs user out and sends back to authentication page
         btnLogout2.setOnClickListener(new View.OnClickListener(){
@@ -140,6 +131,56 @@ public class Spoonacular extends AppCompatActivity {
             }
         });
     }
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+//        return super.onCreateOptionsMenu(menu);   //get rid of default behavior.
+
+        // Inflate the menu; this adds items to the action bar
+        getMenuInflater().inflate(R.menu.my_test_menu, menu);
+        return true;
+    }
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        if (id == R.id.mnu_zero) {
+            Intent intent = new Intent(Spoonacular.this, Spoonacular.class);
+            startActivity(intent);
+            return true;
+        }
+        if (id == R.id.mnu_one) {
+            Intent intent = new Intent(Spoonacular.this, Preferences.class);
+            startActivity(intent);
+            return true;
+        }
+        if (id == R.id.mnu_two) {
+            Intent intent = new Intent(Spoonacular.this, SavedRecipes.class);
+            startActivity(intent);
+            return true;
+        }
+        if (id == R.id.mnu_three) {
+            Intent intent = new Intent(Spoonacular.this, ShoppingList.class);
+            String[] array = {};
+            intent.putExtra("array", array);
+            startActivity(intent);
+            return true;
+        }
+        if (id == R.id.mnu_four) {
+            Intent intent = new Intent(Spoonacular.this, MacroTracker.class);
+            startActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);  //if none of the above are true, do the default and return a boolean.
+    }
+
+
 
     //helper function to fill ListView with JSONObject recipes
     private void fillListObject(JSONObject response) {

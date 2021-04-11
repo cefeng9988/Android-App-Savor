@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+    <item
+        android:id="@+id/mnu_zero"
+        android:title="Home"
+        app:showAsAction="ifRoom">
+    </item>
+
+
+    <item
+        android:id="@+id/mnu_one"
+        android:title="Preferences"
+        app:showAsAction="ifRoom">
+    </item>
+
+    <item
+        android:id="@+id/mnu_two"
+        android:title="Saved Recipes"
+        app:showAsAction="ifRoom">
+    </item>
+
+    <item
+        android:id="@+id/mnu_three"
+        android:title="Shopping List"
+        app:showAsAction="ifRoom">
+    </item>
+
+    <item
+        android:id="@+id/mnu_four"
+        android:title="Calorie Tracker"
+        app:showAsAction="ifRoom">
+    </item>
+
+
+
+</menu>

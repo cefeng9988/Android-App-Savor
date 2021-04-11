@@ -1,4 +1,4 @@
-//user field file, will be used later on for profile/preferences
+//user field file, used for profile/preferences
 package com.example.nutrition;
 
 public class User {

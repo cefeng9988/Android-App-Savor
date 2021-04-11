@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -183,6 +185,57 @@ public class eachRecipe extends AppCompatActivity {
             }
         });
     }
+
+
+
+// create menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+//        return super.onCreateOptionsMenu(menu);   //get rid of default behavior.
+
+        // Inflate the menu; this adds items to the action bar
+        getMenuInflater().inflate(R.menu.my_test_menu, menu);
+        return true;
+    }
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        if (id == R.id.mnu_zero) {
+            Intent intent = new Intent(eachRecipe.this, Spoonacular.class);
+            startActivity(intent);
+            return true;
+        }
+        if (id == R.id.mnu_one) {
+            Intent intent = new Intent(eachRecipe.this, Preferences.class);
+            startActivity(intent);
+            return true;
+        }
+        if (id == R.id.mnu_two) {
+            Intent intent = new Intent(eachRecipe.this, SavedRecipes.class);
+            startActivity(intent);
+            return true;
+        }
+        if (id == R.id.mnu_three) {
+            Intent intent = new Intent(eachRecipe.this, ShoppingList.class);
+            String[] array = {};
+            intent.putExtra("array", array);
+            startActivity(intent);
+            return true;
+        }
+        if (id == R.id.mnu_four) {
+            Intent intent = new Intent(eachRecipe.this, MacroTracker.class);
+            startActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);  //if none of the above are true, do the default and return a boolean.
+    }
+
+
 
     //Fill tuple with reviews from Firebase using RecipeID
     private void fillTuple(String recipeID) {

@@ -6,17 +6,17 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/txtName"
+        android:id="@+id/txtUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-        android:text="User Reviews"
-        android:textColor="#AAAAAA"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        android:text="Saved Recipes"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#AAAAAA" />
 
     <ListView
-        android:id="@+id/revProfileList"
+        android:id="@+id/savedProfileList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"

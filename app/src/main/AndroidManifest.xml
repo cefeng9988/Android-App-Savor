@@ -19,13 +19,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"></activity>
         <activity android:name=".NewAccount"></activity>
         <activity android:name=".Spoonacular"></activity>
         <activity android:name=".SavedRecipes"></activity>
         <activity android:name=".eachRecipe"></activity>
         <activity android:name=".ShoppingList"></activity>
         <activity android:name=".ReviewProfile"></activity>
+        <activity android:name=".Preferences"></activity>
     </application>
 
 </manifest>
