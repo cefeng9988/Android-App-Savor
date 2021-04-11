@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/recipeImage"
+        android:layout_width="114dp"
+        android:layout_height="154dp"
+        android:layout_weight="1"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <!--        android:src="@drawable/livelong_prosper"-->
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/userReview"
+            android:layout_width="151dp"
+            android:layout_height="142dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:hint="Recipe Name"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#616161"
+            android:textSize="40px" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

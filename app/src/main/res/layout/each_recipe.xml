@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/txtTitle"
+        android:layout_width="189dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="4dp"
+        android:text="Recipe Name"
+        android:textSize="40px"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/image"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtCaloriesDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:gravity="center"
+        android:hint="Calories"
+        android:textSize="35px"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/txtCalories"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtCalories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="208dp"
+        android:layout_marginTop="60dp"
+        android:text="Calories: "
+        android:textSize="35px"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtPriceDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:gravity="center"
+        android:hint="Price"
+        android:textSize="35px"
+        app:layout_constraintStart_toEndOf="@+id/txtPrice"
+        app:layout_constraintTop_toBottomOf="@+id/txtCaloriesDisplay" />
+
+    <TextView
+        android:id="@+id/txtPrice"
+        android:layout_width="114dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="2dp"
+        android:text="Price Per Serving: "
+        android:textSize="35px"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.702"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtCaloriesDisplay" />
+
+    <TextView
+        android:id="@+id/txtIngredientsDisplay"
+        android:layout_width="195dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center"
+        android:hint="Ingredients"
+        android:textSize="30px"
+        app:layout_constraintBottom_toBottomOf="@+id/image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/image"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/txtIngredients"
+        android:layout_width="87dp"
+        android:layout_height="19dp"
+        android:text="Ingredients: "
+        android:textSize="35px"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/txtIngredientsDisplay"
+        app:layout_constraintTop_toBottomOf="@+id/txtPrice" />
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="186dp"
+        android:layout_height="171dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="7dp"
+        android:layout_marginBottom="43dp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnShopping"
+        app:layout_constraintEnd_toStartOf="@+id/txtIngredientsDisplay"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <Button
+        android:id="@+id/btnShopping"
+        android:layout_width="87dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="7dp"
+        android:text="Shopping List"
+        android:textSize="22px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.322" />
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="74dp"
+        android:layout_height="43dp"
+        android:text="Save"
+        android:textSize="22px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnSpotify"
+        app:layout_constraintStart_toEndOf="@+id/btnShopping"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.322" />
+
+    <Button
+        android:id="@+id/btnSpotify"
+        android:layout_width="83dp"
+        android:layout_height="42dp"
+        android:text="Play Spotify"
+        android:textSize="22px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnTracker"
+        app:layout_constraintStart_toEndOf="@+id/btnSave"
+        app:layout_constraintTop_toTopOf="@+id/btnSave"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/btnTracker"
+        android:layout_width="94dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="10dp"
+        android:text="Macro Tracker"
+        android:textSize="22px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnSpotify"
+        app:layout_constraintTop_toTopOf="@+id/btnSpotify"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ListView
+        android:id="@+id/recipeList"
+        android:layout_width="395dp"
+        android:layout_height="289dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="230dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="196dp"
+        android:fastScrollAlwaysVisible="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/image"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/txtReview"
+        android:layout_width="265dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:hint="Leave a review"
+        android:inputType="textPersonName"
+        android:textSize="30px"
+        app:layout_constraintBottom_toTopOf="@+id/reviewList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.026"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnSubmitReview"
+        android:layout_width="109dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="18dp"
+        android:text="Submit"
+        android:textSize="30px"
+        app:layout_constraintBottom_toTopOf="@+id/reviewList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/txtReview" />
+
+    <ListView
+        android:id="@+id/reviewList"
+        android:layout_width="406dp"
+        android:layout_height="113dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:fastScrollAlwaysVisible="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recipeList"
+        app:layout_constraintVertical_bias="0.933" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
