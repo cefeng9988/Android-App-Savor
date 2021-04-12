@@ -77,6 +77,8 @@ public class ShoppingList extends AppCompatActivity {
         slAdapter = new ShoppingListAdapter(this.getBaseContext(), listInput);
         lvShoppingList.setAdapter(slAdapter);
 
+        //SAVE SHARED PREF HERE
+
         //remove all
         btnClear = (Button) findViewById(R.id.btnClear);
         btnClear.setOnClickListener(new View.OnClickListener() {
@@ -220,7 +222,8 @@ public class ShoppingList extends AppCompatActivity {
                     listInput = temp.toArray(buffer);
                     notifyDataSetChanged();
                     current_ingredients.remove(position);
-                    Log.i("remove", "removed " + current_ingredients.get(position));
+
+                    //SAVE SHARED PREF HERE
                 }
             });
 //the row has been inflated and filled with data, return it.
