@@ -19,9 +19,10 @@ import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class ShoppingList extends AppCompatActivity {
     //Setting up the ListView
@@ -33,8 +34,7 @@ public class ShoppingList extends AppCompatActivity {
     //input is 2D array for ingredient and boolean for if box has been checked or not
     String[][] listInput;
     String[] ingredients;
-    String[] empty;
-
+    String userId;
     ArrayList<String> current_ingredients = new ArrayList<>();
 
     public SharedPreferences pref;
@@ -46,6 +46,9 @@ public class ShoppingList extends AppCompatActivity {
 
         aContext = this.getBaseContext();
 
+        userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        Log.i("userId", "userId: " + userId);
+
         //used shared preferences to save previously saved ingredients
         pref = getSharedPreferences("pref", Context.MODE_PRIVATE);
 
@@ -54,10 +57,10 @@ public class ShoppingList extends AppCompatActivity {
         ingredients = intent.getStringArrayExtra("array");
 
         //retrieve newly added ingredients into total/previously stored ingredients
-        int size = pref.getInt("total_ingredients_size", 0);
+        int size = pref.getInt(userId + "total_ingredients_size", 0);
         current_ingredients = new ArrayList<>(size);
         for(int i=0;i<size;i++)
-            current_ingredients.add(pref.getString("total_ingredients" + "_" + i, null));
+            current_ingredients.add(pref.getString(userId + "total_ingredients" + "_" + i, null));
 
         //add new ingredients to the current_ingredients list
         for(int i = 0; i<ingredients.length; i++){
@@ -73,11 +76,10 @@ public class ShoppingList extends AppCompatActivity {
         }
 
         //inflate shopping list
-        lvShoppingList = (ListView) findViewById(R.id.lvShoppingList);
+        lvShoppingList = (ListView) findViewById(R.id.lvTrackerList);
         slAdapter = new ShoppingListAdapter(this.getBaseContext(), listInput);
         lvShoppingList.setAdapter(slAdapter);
 
-        //SAVE SHARED PREF HERE
 
         //remove all
         btnClear = (Button) findViewById(R.id.btnClear);
@@ -148,9 +150,9 @@ public class ShoppingList extends AppCompatActivity {
         super.onDestroy();
         // save ingredients using shared preferences
         SharedPreferences.Editor editor = pref.edit();
-        editor.putInt("total_ingredients_size", current_ingredients.size());
+        editor.putInt(userId + "total_ingredients_size", current_ingredients.size());
         for(int i=0;i<current_ingredients.size();i++)
-            editor.putString("total_ingredients" + "_" + i, current_ingredients.get(i));
+            editor.putString(userId + "total_ingredients" + "_" + i, current_ingredients.get(i));
 
         editor.apply();
     }
@@ -198,7 +200,7 @@ public class ShoppingList extends AppCompatActivity {
             }
 
 //Now that we have a valid row instance, we need to get references to the views within that row and fill it
-            CheckBox checkBox = (CheckBox) row.findViewById(R.id.ingredientCheck);
+            CheckBox checkBox = (CheckBox) row.findViewById(R.id.calorieCheck);
             checkBox.setText(listInput[position][0]);
             checkBox.setChecked(Boolean.parseBoolean(listInput[position][1]));
 

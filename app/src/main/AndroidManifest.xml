@@ -26,6 +26,7 @@
         <activity android:name=".ShoppingList"></activity>
         <activity android:name=".ReviewProfile"></activity>
         <activity android:name=".Preferences"></activity>
+        <activity android:name=".MacroTracker"></activity>
     </application>
 
 </manifest>
