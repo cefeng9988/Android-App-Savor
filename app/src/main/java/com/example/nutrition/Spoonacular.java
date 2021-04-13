@@ -45,13 +45,12 @@ import java.util.Arrays;
 import javax.crypto.Mac;
 
 public class Spoonacular extends AppCompatActivity {
-    private Button btnSubmit1, btnSubmit2, btnSave, btnLogout2, btnSavedRecipes;
+    private Button btnSubmit1, btnSubmit2;
     private EditText txtEdtKeyWords, txtEdtIngredients;
     private ImageView image;
-    private String query, ingredients, summary;
+    private String query, ingredients;
     private ListView recipeList;
     private ListAdapter lvAdapter;
-    private View[] listViews;
     private int recipeLength;
     Intent intent;
 
@@ -62,9 +61,6 @@ public class Spoonacular extends AppCompatActivity {
 
         btnSubmit1 = (Button) findViewById(R.id.btnSubmit1);
         btnSubmit2 = (Button) findViewById(R.id.btnSubmit2);
-        btnSave = (Button) findViewById(R.id.btnSave);
-        btnLogout2 = (Button) findViewById(R.id.btnLogout2);
-        btnSavedRecipes = (Button) findViewById(R.id.btnSavedRecipes);
         txtEdtKeyWords = (EditText) findViewById(R.id.txtEdtKeyWords);
         txtEdtIngredients = (EditText) findViewById(R.id.txtEdtIngredients);
         image = (ImageView) findViewById(R.id.image);
@@ -112,24 +108,6 @@ public class Spoonacular extends AppCompatActivity {
         });
 
 
-        // logs user out and sends back to authentication page
-        btnLogout2.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Spoonacular.this, Authentication.class);
-                startActivity(intent);
-                Toast.makeText(getApplicationContext(), "Logged Out",Toast.LENGTH_LONG).show();
-            }
-        });
-
-        // Goes to saved recipes page
-        btnSavedRecipes.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Spoonacular.this, SavedRecipes.class);
-                startActivity(intent);
-            }
-        });
     }
 
 
@@ -175,6 +153,12 @@ public class Spoonacular extends AppCompatActivity {
         if (id == R.id.mnu_four) {
             Intent intent = new Intent(Spoonacular.this, MacroTracker.class);
             startActivity(intent);
+            return true;
+        }
+        if (id == R.id.mnu_five) {
+            Intent intent = new Intent(Spoonacular.this, Authentication.class);
+            startActivity(intent);
+            Toast.makeText(getApplicationContext(), "Logged Out",Toast.LENGTH_LONG).show();
             return true;
         }
         return super.onOptionsItemSelected(item);  //if none of the above are true, do the default and return a boolean.

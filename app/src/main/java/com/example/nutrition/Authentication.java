@@ -64,6 +64,12 @@ public class Authentication extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        // super.onBackPressed();
+        Toast.makeText(getApplicationContext(), "There is no back action", Toast.LENGTH_SHORT).show();
+    }
+
     //log in helper function
     private void loginUser() {
 

@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -139,6 +140,12 @@ public class ShoppingList extends AppCompatActivity {
         if (id == R.id.mnu_four) {
             Intent intent = new Intent(ShoppingList.this, MacroTracker.class);
             startActivity(intent);
+            return true;
+        }
+        if (id == R.id.mnu_five) {
+            Intent intent = new Intent(ShoppingList.this, Authentication.class);
+            startActivity(intent);
+            Toast.makeText(getApplicationContext(), "Logged Out",Toast.LENGTH_LONG).show();
             return true;
         }
         return super.onOptionsItemSelected(item);  //if none of the above are true, do the default and return a boolean.

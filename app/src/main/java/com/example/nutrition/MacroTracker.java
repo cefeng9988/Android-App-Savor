@@ -37,7 +37,7 @@ public class MacroTracker extends AppCompatActivity {
     //input is 2D array for ingredient and boolean for if box has been checked or not
     String[][] listInput;
 
-    private String calories;
+    String calories;
     String userId;
 
     int totalcalories = 0;
@@ -159,6 +159,12 @@ public class MacroTracker extends AppCompatActivity {
         if (id == R.id.mnu_four) {
             Intent intent = new Intent(MacroTracker.this, MacroTracker.class);
             startActivity(intent);
+            return true;
+        }
+        if (id == R.id.mnu_five) {
+            Intent intent = new Intent(MacroTracker.this, Authentication.class);
+            startActivity(intent);
+            Toast.makeText(getApplicationContext(), "Logged Out",Toast.LENGTH_LONG).show();
             return true;
         }
         return super.onOptionsItemSelected(item);  //if none of the above are true, do the default and return a boolean.

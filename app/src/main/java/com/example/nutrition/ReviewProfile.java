@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -125,6 +126,12 @@ public class ReviewProfile extends AppCompatActivity {
         if (id == R.id.mnu_four) {
             Intent intent = new Intent(ReviewProfile.this, MacroTracker.class);
             startActivity(intent);
+            return true;
+        }
+        if (id == R.id.mnu_five) {
+            Intent intent = new Intent(ReviewProfile.this, Authentication.class);
+            startActivity(intent);
+            Toast.makeText(getApplicationContext(), "Logged Out",Toast.LENGTH_LONG).show();
             return true;
         }
         return super.onOptionsItemSelected(item);  //if none of the above are true, do the default and return a boolean.

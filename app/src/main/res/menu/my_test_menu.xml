@@ -35,6 +35,12 @@
         app:showAsAction="ifRoom">
     </item>
 
+    <item
+        android:id="@+id/mnu_five"
+        android:title="Log out"
+        app:showAsAction="ifRoom">
+    </item>
+
 
 
 </menu>

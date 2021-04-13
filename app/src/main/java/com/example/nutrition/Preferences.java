@@ -108,6 +108,12 @@ public class Preferences extends AppCompatActivity {
             startActivity(intent);
             return true;
         }
+        if (id == R.id.mnu_five) {
+            Intent intent = new Intent(Preferences.this, Authentication.class);
+            startActivity(intent);
+            Toast.makeText(getApplicationContext(), "Logged Out",Toast.LENGTH_LONG).show();
+            return true;
+        }
         return super.onOptionsItemSelected(item);  //if none of the above are true, do the default and return a boolean.
     }
 }
