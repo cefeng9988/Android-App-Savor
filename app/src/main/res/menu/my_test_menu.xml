@@ -7,6 +7,7 @@
     <item
         android:id="@+id/mnu_zero"
         android:title="Home"
+        android:icon="@drawable/home"
         app:showAsAction="ifRoom">
     </item>
 
@@ -14,6 +15,7 @@
     <item
         android:id="@+id/mnu_one"
         android:title="Preferences"
+        android:icon="@drawable/preference"
         app:showAsAction="ifRoom">
     </item>
 
