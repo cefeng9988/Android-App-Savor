@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
 
     <TextView
         android:id="@+id/txtTitle"
@@ -107,54 +108,56 @@
 
     <Button
         android:id="@+id/btnShopping"
-        android:layout_width="87dp"
+        android:layout_width="82dp"
         android:layout_height="42dp"
-        android:layout_marginEnd="7dp"
-        android:text="Add To List"
-        android:textSize="22px"
+        android:backgroundTint="@color/yellow"
+        android:paddingLeft="25dp"
+        app:icon="@drawable/list"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintHorizontal_bias="0.059"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.322" />
 
     <Button
         android:id="@+id/btnSave"
-        android:layout_width="74dp"
-        android:layout_height="43dp"
-        android:text="Save"
-        android:textSize="22px"
+        android:layout_width="82dp"
+        android:layout_height="42dp"
+        android:paddingLeft="25dp"
+        app:icon="@drawable/save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnSpotify"
         app:layout_constraintStart_toEndOf="@+id/btnShopping"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.322" />
+        app:layout_constraintVertical_bias="0.322"
+        android:backgroundTint="@color/yellow"/>
 
     <Button
         android:id="@+id/btnSpotify"
-        android:layout_width="83dp"
+        android:layout_width="82dp"
         android:layout_height="42dp"
-        android:text="Play Spotify"
-        android:textSize="22px"
+        android:paddingLeft="25dp"
+        app:icon="@drawable/play"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnTracker"
         app:layout_constraintStart_toEndOf="@+id/btnSave"
         app:layout_constraintTop_toTopOf="@+id/btnSave"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        android:backgroundTint="@color/yellow"/>
 
     <Button
         android:id="@+id/btnTracker"
-        android:layout_width="94dp"
+        android:layout_width="82dp"
         android:layout_height="42dp"
-        android:layout_marginEnd="10dp"
-        android:text="Add To Tracker"
-        android:textSize="22px"
+        android:paddingLeft="25dp"
+        app:icon="@drawable/tracker"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnSpotify"
         app:layout_constraintTop_toTopOf="@+id/btnSpotify"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        android:backgroundTint="@color/yellow"/>
 
     <ListView
         android:id="@+id/recipeList"
@@ -197,7 +200,8 @@
         app:layout_constraintBottom_toTopOf="@+id/reviewList"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/txtReview" />
+        app:layout_constraintStart_toEndOf="@+id/txtReview"
+        android:backgroundTint="@color/yellow"/>
 
     <ListView
         android:id="@+id/reviewList"
