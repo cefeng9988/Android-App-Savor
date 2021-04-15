@@ -142,6 +142,8 @@ public class eachRecipe extends AppCompatActivity {
                 intent = new Intent(getApplicationContext(), MacroTracker.class);
                 //intent extra add the following array
                 intent.putExtra("calories", calories);
+                intent.putExtra("recipeName", recipeName);
+                intent.putExtra("RecipeID", recipeID);
                 startActivity(intent);
             }
         });
