@@ -5,12 +5,23 @@
     android:layout_height="40dp">
 
 
-    <CheckBox
-        android:id="@+id/calorieCheck"
-        android:layout_width="292dp"
+    <Button
+        android:id="@+id/btnRecipe"
+        android:layout_width="160dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:hint="Recipe Ingredient"
+        android:backgroundTint="#AAAAAA"
+        android:gravity="center"
+        android:hint="Recipe Name"
+        android:textColor="@color/black"
+        android:textSize="30px" />
+
+    <CheckBox
+        android:id="@+id/calorieCheck"
+        android:layout_width="231dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:hint="Recipe Calories"
         android:textColor="#AAAAAA" />
 
     <Button

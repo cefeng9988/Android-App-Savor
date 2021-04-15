@@ -56,6 +56,57 @@ public class SavedRecipes extends AppCompatActivity {
 
         userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
+        // check if there is a record of saved recipes for a user
+        UserSavedRecipes.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                if (snapshot.hasChild(userID)) {
+                    // run some code
+
+
+                    //loop through reviews under userID and save to String[]
+                    UserSavedRecipes.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            int count = 0;
+                            for (DataSnapshot childDataSnapshot : snapshot.getChildren()) {
+                                count++;
+                            }
+                            //instantiate our String[] to hold each review data
+                            savedData = new String[count][2];
+                            int index = 0;
+                            for (DataSnapshot childDataSnapshot : snapshot.getChildren()) {
+                                Log.i("TAG","childkey: "+ childDataSnapshot.getKey()); //displays the key for the node
+                                Log.i("TAG","childvalue: "+  snapshot.child(String.valueOf(childDataSnapshot.getKey())).getValue().toString());
+
+                                savedData[index][0] = childDataSnapshot.getKey();
+                                savedData[index][1] = snapshot.child(String.valueOf(childDataSnapshot.getKey())).getValue().toString();
+                                index++;
+                            }
+
+                            Log.i("TAG","savedData key: "+ savedData[0][0]);
+                            Log.i("TAG","savedData value: "+ savedData[0][1]);
+
+                            //instantiate adaptor then set ListView with adapter
+                            lvAdapter = new MyCustomAdapter(context, savedData);
+                            savedProfileList.setAdapter(lvAdapter);
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                        }
+                    });
+
+
+                }
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+
+        /*
         //loop through reviews under userID and save to String[]
         UserSavedRecipes.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -87,6 +138,9 @@ public class SavedRecipes extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
+
+*/
+
     }
 
 
