@@ -1,3 +1,4 @@
+include ':spotify-app-remote-final'
 include ':app'
 include ':app', ':volley'
 rootProject.name = "Nutrition"

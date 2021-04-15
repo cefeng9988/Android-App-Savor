@@ -44,6 +44,16 @@ import org.json.JSONObject;
 
 import java.util.concurrent.CountDownLatch;
 
+import com.spotify.android.appremote.api.ConnectionParams;
+import com.spotify.android.appremote.api.Connector;
+import com.spotify.android.appremote.api.SpotifyAppRemote;
+
+import com.spotify.protocol.client.Subscription;
+import com.spotify.protocol.types.PlayerState;
+import com.spotify.protocol.types.Track;
+
+
+
 public class eachRecipe extends AppCompatActivity {
     private TextView txtTitle, txtCaloriesDisplay, txtPriceDisplay, txtIngredientsDisplay;
     private Button btnSubmitReview, btnShopping, btnTracker, btnSave;
@@ -64,6 +74,13 @@ public class eachRecipe extends AppCompatActivity {
     private DatabaseReference UserProfileRef;
     private DatabaseReference UsersRef;
     String userId;
+
+    private static final String CLIENT_ID = "7665db3e28e2473aa1bf4b824b15b40a"; //bgzhang@bu.edu spotify acc (original)
+    //private static final String CLIENT_ID ="8952e63ad6954705a1ab2e2ce5caa4c2"; //bgzhang2@gmail.com spotify secondary acc
+    private static final String REDIRECT_URI = "https://google.com";
+    //private static final String REDIRECT_URI = "com.example.spotifytest://callback";
+    private SpotifyAppRemote mSpotifyAppRemote;
+    private Button btnSpotify;
 
 
 
@@ -92,6 +109,7 @@ public class eachRecipe extends AppCompatActivity {
         UserProfileRef = FirebaseDatabase.getInstance().getReference().child("UserProfiles");
         UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        btnSpotify = (Button) findViewById(R.id.btnSpotify);
 
 
         intent = getIntent();
@@ -184,6 +202,160 @@ public class eachRecipe extends AppCompatActivity {
                 });
             }
         });
+
+        btnSpotify.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                ConnectionParams connectionParams =
+                        new ConnectionParams.Builder(CLIENT_ID)
+                                .setRedirectUri(REDIRECT_URI)
+                                .showAuthView(true)
+                                .build();
+
+                SpotifyAppRemote.connect(getApplicationContext(), connectionParams,
+                        new Connector.ConnectionListener() {
+
+                            @Override
+                            public void onConnected(SpotifyAppRemote spotifyAppRemote) {
+                                mSpotifyAppRemote = spotifyAppRemote;
+                                Log.d("MainActivity", "Connected! Yay!");
+
+
+                                connected();
+                            }
+
+                            @Override
+                            public void onFailure(Throwable throwable) {
+                                Log.e("MainActivity", throwable.getMessage(), throwable);
+
+
+                            }
+                        });
+
+            }
+
+
+        });
+
+    }
+
+    private String cuisineToURI(String cuisine)
+    {
+        cuisine = cuisine.toLowerCase(); //convert user input to all lowercase for switch statement
+        String playlistURI = "";
+
+        switch (cuisine)
+        {
+            case "african":
+                playlistURI = "spotify:playlist:7snw0knGkLp2sbOmtxM4bK";
+                break;
+            case "american":
+                playlistURI = "spotify:playlist:37i9dQZF1DWTkyF6GNu8Nf";
+                break;
+            case "british":
+                playlistURI = "spotify:playlist:1y7E5GXSac77FzesM2ASjx";
+                break;
+            case "cajun":
+                playlistURI = "spotify:playlist:2KmefvmYGgMH8fvkHLWHse";
+                break;
+            case "caribbean":
+                playlistURI = "spotify:playlist:2jQDPMUh81UWuXqRufi8qO";
+                break;
+            case "chinese":
+                playlistURI = "spotify:playlist:6QCOn8cCy7Nwa2oyhHtfB4";
+                break;
+            case "eastern european":
+                playlistURI = "spotify:playlist:0s62ty61GFrKxbIg8jyszo";
+                break;
+            case "european":
+                playlistURI = "spotify:playlist:5WYL1hyCX32ufeAseT8die";
+                break;
+            case "french":
+                playlistURI = "spotify:playlist:4TT7cOqojq7JeDMiQwTA9Z";
+                break;
+            case "german":
+                playlistURI = "spotify:playlist:7Cdk1T18F4mJKNPJxmP8o3";
+                break;
+            case "greek":
+                playlistURI = "spotify:playlist:2pozvQaElyGIHFbD1TP2Fw";
+                break;
+            case "indian":
+                playlistURI = "spotify:playlist:4s6aflkIZ5mTub2uJ3esj3";
+                break;
+            case "irish":
+                playlistURI = "spotify:playlist:5aSO2lT7sVPKut6F9L6IAc";
+                break;
+            case "italian":
+                playlistURI = "spotify:playlist:4VuLgMrMzBynB4hcMCmYWa";
+                break;
+            case "japanese":
+                playlistURI = "spotify:playlist:5q6ztbyqMoAEx9AaR1Y442";
+                break;
+            case "jewish":
+                playlistURI = "spotify:playlist:3bvTqM2UeFVOh9vKEu3m1Y";
+                break;
+            case "korean":
+                playlistURI = "spotify:playlist:6Rb4Ff5UQttjCAEN7qwXyR";
+                break;
+            case "latin american":
+                playlistURI = "spotify:playlist:37i9dQZF1DX5qGup0t1SY0";
+                break;
+            case "mediterranean":
+                playlistURI = "spotify:playlist:1pKpHwwvfOjTh7PBxVV15Q";
+                break;
+            case "mexican":
+                playlistURI = "spotify:playlist:7nAsFP11mQLJWrZ8uQbpM0";
+                break;
+            case "middle eastern":
+                playlistURI = "spotify:playlist:5E7yzLgfs3WyEtvJtjmLPA";
+                break;
+            case "nordic":
+                playlistURI = "spotify:playlist:2ArQdshMTWzfI8OZQiP7tj";
+                break;
+            case "southern":
+                playlistURI = "spotify:playlist:1JEnLyj9epkZJbWNuw0DIQ";
+                break;
+            case "spanish":
+                playlistURI = "spotify:playlist:2tbpZ1Cj6K7SoUgh8KgeWg";
+                break;
+            case "thai":
+                playlistURI = "spotify:playlist:2jSVf5LHKV2udoHp6Tvt5C";
+                break;
+            case "vietnamese":
+                playlistURI = "spotify:playlist:4VfiJMSRNZqW6ZOH01CmKQ";
+                break;
+            default: //default playlist is the American music playlist
+                playlistURI = "spotify:playlist:37i9dQZF1DWTkyF6GNu8Nf";
+                break;
+
+
+        }
+
+
+        return playlistURI;
+
+
+
+
+    }
+
+
+    private void connected() {
+        //retrieve cuisine String here and pass it into the helper method, and then take the returned playlistURI string
+        //and pass that into getPlayerApi().play(String URI) below
+
+        //obtain playlist URI
+        mSpotifyAppRemote.getPlayerApi().play("spotify:playlist:37i9dQZF1DX7K31D69s4M1"); //placeholder playlist URI: piano music playlist provided by spotify
+
+        mSpotifyAppRemote.getPlayerApi()
+                .subscribeToPlayerState()
+                .setEventCallback(playerState -> {
+                    final Track track = playerState.track;
+                    if (track != null) {
+                        //track information
+                        Log.d("MainActivity", track.name + " by " + track.artist.name);
+                    }
+                });
     }
 
 
