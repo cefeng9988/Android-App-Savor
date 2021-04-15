@@ -252,8 +252,8 @@ public class MacroTracker extends AppCompatActivity {
                     current_calories.remove(position);
 
                     // update total calories
-                    //totalcalories -= Integer.parseInt(current_calories.get(position));
-                    //txtTotalKcals.setText(String.valueOf(totalcalories));
+                    totalcalories -= Integer.parseInt(current_calories.get(position));
+                    txtTotalKcals.setText(String.valueOf(totalcalories));
 
 
                     //SAVE SHARED PREF HERE

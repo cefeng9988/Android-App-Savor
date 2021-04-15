@@ -155,6 +155,7 @@ public class ShoppingList extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        Log.i("TAG", "onDestroy HIT HERE");
         // save ingredients using shared preferences
         SharedPreferences.Editor editor = pref.edit();
         editor.putInt(userId + "total_ingredients_size", current_ingredients.size());
@@ -164,7 +165,18 @@ public class ShoppingList extends AppCompatActivity {
         editor.apply();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.i("TAG", "onPause HIT HERE");
+        // save ingredients using shared preferences
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putInt(userId + "total_ingredients_size", current_ingredients.size());
+        for(int i=0;i<current_ingredients.size();i++)
+            editor.putString(userId + "total_ingredients" + "_" + i, current_ingredients.get(i));
 
+        editor.apply();
+    }
 
     class ShoppingListAdapter extends BaseAdapter {
         private
@@ -215,7 +227,11 @@ public class ShoppingList extends AppCompatActivity {
             checkBox.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listInput[position][1] = "true";
+                    if(listInput[position][1].equals("false")) {
+                        listInput[position][1] = "true";
+                    }else{
+                        listInput[position][1] = "false";
+                    }
                 }
             });
 

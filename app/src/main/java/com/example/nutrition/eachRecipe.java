@@ -393,6 +393,7 @@ public class eachRecipe extends AppCompatActivity {
                             //set calories
                             calories = getCalories(response.getString("summary"));
                             if(calories==0){
+                                calories = 73;
                                 txtCaloriesDisplay.setText("" + (calories+73) + " per serving");
                             }else {
                                 txtCaloriesDisplay.setText("" + calories + " per serving");
