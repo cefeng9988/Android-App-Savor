@@ -7,7 +7,7 @@
     android:background="@drawable/background">
 
     <TextView
-        android:id="@+id/txtShoppingList"
+        android:id="@+id/txtTrackerList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"

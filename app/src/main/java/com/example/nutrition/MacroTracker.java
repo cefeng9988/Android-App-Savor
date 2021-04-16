@@ -39,12 +39,14 @@ public class MacroTracker extends AppCompatActivity {
 
     String calories;
     String recipeName;
+    String recipeID;
     String userId;
 
     int totalcalories = 0; // keeps track of the total calories added together
 
     ArrayList<String> current_calories = new ArrayList<>(); // stores all the calories to be displayed
     ArrayList<String> current_recipeNames = new ArrayList<>(); // stores all the recipenames to be displayed
+    ArrayList<String> current_recipeIDs = new ArrayList<>(); // stores all the recipeIDs to be used to create intent for each recipeName button
 
     public SharedPreferences pref;
 
@@ -54,21 +56,25 @@ public class MacroTracker extends AppCompatActivity {
         setContentView(R.layout.macrotracker);
 
         aContext = this.getBaseContext();
-
         // acquire the unique key of the current user
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
         txtTotalKcals = (TextView) findViewById(R.id.txtTotalKcals);
-
         //used shared preferences to save previously saved ingredients
         pref = getSharedPreferences("pref", Context.MODE_PRIVATE);
 
+
+////
         intent = getIntent();
         //get calorie from intent extras
         calories = String.valueOf(intent.getIntExtra("calories",0));
         //get recipename from intent extras
         recipeName = intent.getStringExtra("recipeName");
+        //get recipeID from intent extras
+        recipeID = intent.getStringExtra("recipeID");
+////
 
+
+////
         //retrieve newly added calorie into total/previously stored calories
         int size = pref.getInt(userId + "total_calories_size", 0);
         current_calories = new ArrayList<>(size);
@@ -81,6 +87,15 @@ public class MacroTracker extends AppCompatActivity {
         for(int i=0;i<size;i++)
             current_recipeNames.add(pref.getString(userId + "total_recipes" + "_" + i, null));
 
+        //retrieve newly added ID into total/previously stored ID
+        int IDsize = pref.getInt(userId + "total_ID_size", 0);
+        current_recipeIDs = new ArrayList<>(IDsize);
+        for(int i=0;i<IDsize;i++)
+            current_recipeIDs.add(pref.getString(userId + "ID" + "_" + i, null));
+////
+
+
+////
         // handle case when recipe has 0 calories
         if (!calories.equals("0")) {
             // scenario when using enters activity through menu or when recipe has calories listed as 0
@@ -93,6 +108,16 @@ public class MacroTracker extends AppCompatActivity {
             current_recipeNames.add(recipeName);
         }
 
+        // handle case when recipeID is not null (so app does not add null variables into list)
+        // i.e. when the user enters the activity through the menu
+        if (recipeID != null) {
+            current_recipeIDs.add(recipeID);
+        }
+////
+
+
+
+////
         // add up all the calories to display the total calories
         for(int i = 0; i<current_calories.size(); i++){
             totalcalories += Integer.parseInt(current_calories.get(i));
@@ -103,9 +128,11 @@ public class MacroTracker extends AppCompatActivity {
         SharedPreferences.Editor editor = pref.edit();
         editor.putInt("totalcalories", totalcalories);
         editor.apply();
+////
 
 
 
+////
         //fill our 2D array of calories and boolean value for setChecked
         listInput = new String[current_calories.size()][2];
         for(int i = 0; i<listInput.length; i++){
@@ -118,6 +145,7 @@ public class MacroTracker extends AppCompatActivity {
         for(int i = 0; i<recipelistInput.length; i++){
             recipelistInput[i] = current_recipeNames.get(i);
         }
+////
 
 
         //inflate tracker list
@@ -138,6 +166,7 @@ public class MacroTracker extends AppCompatActivity {
                 lvTrackerList.setAdapter(trackerAdapter);
                 current_calories.clear();
                 current_recipeNames.clear();
+                current_recipeIDs.clear();
                 txtTotalKcals.setText("0");
             }
         });
@@ -206,8 +235,10 @@ public class MacroTracker extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        // save ingredients using shared preferences
+        // save using shared preferences
         SharedPreferences.Editor editor = pref.edit();
+
+
         // save the size of the current_calories arraylist
         editor.putInt(userId + "total_calories_size", current_calories.size());
         // traverse through the arraylist and store each of the calories based on the user's unique userId key and the iteration of i
@@ -215,9 +246,16 @@ public class MacroTracker extends AppCompatActivity {
             editor.putString(userId + "total_calories" + "_" + i, current_calories.get(i));
 
 
+        // save the recipe names for each recipe using shared preferences
         editor.putInt(userId + "total_recipes_size", current_recipeNames.size());
         for(int i=0;i<current_recipeNames.size();i++)
             editor.putString(userId + "total_recipes" + "_" + i, current_recipeNames.get(i));
+
+
+        // save the recipeIDs for each recipe using shared preferences
+        editor.putInt(userId + "total_ID_size", current_recipeIDs.size());
+        for(int i=0;i<current_recipeIDs.size();i++)
+            editor.putString(userId + "ID" + "_" + i, current_recipeIDs.get(i));
 
         editor.apply();
     }
@@ -226,18 +264,29 @@ public class MacroTracker extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // save calories for each recipe using shared preferences
+
+        // save using shared preferences
         SharedPreferences.Editor editor = pref.edit();
+
+
         // save the size of the current_calories arraylist
         editor.putInt(userId + "total_calories_size", current_calories.size());
         // traverse through the arraylist and store each of the calories based on the user's unique userId key and the iteration of i
         for(int i=0;i<current_calories.size();i++)
             editor.putString(userId + "total_calories" + "_" + i, current_calories.get(i));
 
+
         // save the recipe names for each recipe using shared preferences
         editor.putInt(userId + "total_recipes_size", current_recipeNames.size());
         for(int i=0;i<current_recipeNames.size();i++)
             editor.putString(userId + "total_recipes" + "_" + i, current_recipeNames.get(i));
+
+
+        // save the recipeIDs for each recipe using shared preferences
+        editor.putInt(userId + "total_ID_size", current_recipeIDs.size());
+        for(int i=0;i<current_recipeIDs.size();i++)
+            editor.putString(userId + "ID" + "_" + i, current_recipeIDs.get(i));
+
 
         editor.apply();
     }
@@ -306,6 +355,22 @@ public class MacroTracker extends AppCompatActivity {
             });
 
 
+
+            //button listener to go to eachRecipe with recipeID
+            btnRecipe.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //intent to go to reviewProfile activity
+                    intent = new Intent(getApplicationContext(), eachRecipe.class);
+                    //intent extra add the recipeID of row
+                    String recipeID = current_recipeIDs.get(position);
+                    intent.putExtra("recipeID", recipeID);
+                    startActivity(intent);
+                }
+            });
+
+
+
             // remove item
             btnRemove = (Button) row.findViewById(R.id.btnRemoveRecipe);
             btnRemove.setOnClickListener(new View.OnClickListener() {
@@ -341,6 +406,8 @@ public class MacroTracker extends AppCompatActivity {
                     recipelistInput = recipetemp.toArray(recipebuffer);
                     notifyDataSetChanged();
                     current_recipeNames.remove(position);
+
+                    current_recipeIDs.remove(position);
 
                 }
             });

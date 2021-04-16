@@ -146,7 +146,7 @@ public class eachRecipe extends AppCompatActivity {
                 //intent extra add the following array
                 intent.putExtra("calories", calories);
                 intent.putExtra("recipeName", recipeName);
-                intent.putExtra("RecipeID", recipeID);
+                intent.putExtra("recipeID", recipeID);
                 startActivity(intent);
             }
         });
