@@ -95,10 +95,7 @@ public class SavedRecipes extends AppCompatActivity {
                         public void onCancelled(@NonNull DatabaseError error) {
                         }
                     });
-
-
                 }
-
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

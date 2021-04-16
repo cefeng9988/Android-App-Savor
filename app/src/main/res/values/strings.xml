@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Nutrition</string>
+    <string name="create_new_account">Create New Account</string>
+    <string name="already_have_an_account_log_in">Already have an account? Log in</string>
+    <string name="create">Create</string>
 
 
     <string-array name="numbers">

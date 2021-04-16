@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -25,17 +27,18 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class Preferences extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+public class Preferences extends AppCompatActivity {
 
     private EditText edtUser, edtUserAge;
-    private Spinner spinnerRecipesDisplayed;
+    private TextView txtWelcome;
     private ToggleButton toggleButtonVegan;
-    private Button btnUpdate;
+    private Button btnUpdate, btn5, btn10, btn15;
+    private boolean recipeChanged, veganChanged;
 
     private DatabaseReference UsersRef;
     String userId;
 
-    String recipesDisplayed = "10";
+    String recipesDisplayed;
     String vegan = "False";
 
     @Override
@@ -45,29 +48,104 @@ public class Preferences extends AppCompatActivity implements AdapterView.OnItem
 
         edtUser = (EditText) findViewById(R.id.edtUser);
         edtUserAge = (EditText) findViewById(R.id.edtUserAge);
+        txtWelcome = (TextView) findViewById(R.id.txtWelcome);
         btnUpdate = (Button) findViewById(R.id.btnUpdate);
-        spinnerRecipesDisplayed = (Spinner) findViewById(R.id.spinnerRecipesDisplayed);
+        btn5 = (Button) findViewById(R.id.btn5);
+        btn10 = (Button) findViewById(R.id.btn10);
+        btn15 = (Button) findViewById(R.id.btn15);
         toggleButtonVegan = (ToggleButton) findViewById(R.id.toggleButtonVegan);
+
+        //boolean tells us if user changed recipe count or if vegan is toggled
+        recipeChanged = false;
+        veganChanged = false;
 
         UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.numbers, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //set recipesDisplayed to value saved in database
+        UsersRef.child(userId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //preset Vegan toggle based on saved data
+                if(dataSnapshot.child("Vegan").getValue().toString().equals("True")) {
+                    toggleButtonVegan.setChecked(true);
+                }else{
+                    toggleButtonVegan.setChecked(false);
+                }
+                recipesDisplayed = dataSnapshot.child("Recipes Displayed").getValue().toString();
+                if(recipesDisplayed.equals("5")){
+                    //enable the buttons based on which is pressed
+                    btn5.setEnabled(false);
+                    btn10.setEnabled(true);
+                    btn15.setEnabled(true);
+                }else if(recipesDisplayed.equals("10")){
+                    //enable the buttons based on which is pressed
+                    btn10.setEnabled(false);
+                    btn15.setEnabled(true);
+                    btn5.setEnabled(true);
+                }else if(recipesDisplayed.equals("15")){
+                    //enable the buttons based on which is pressed
+                    btn15.setEnabled(false);
+                    btn10.setEnabled(true);
+                    btn5.setEnabled(true);
+                }
+                Log.i("TAG", "recipesDisplayed from Firebase: "+recipesDisplayed);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
 
-        spinnerRecipesDisplayed.setAdapter(adapter);
-        spinnerRecipesDisplayed.setOnItemSelectedListener(this);
+        //set Welcome message
+        setWelcome();
+        //user changed # of recipes
+        btn5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                recipeChanged = true;
+                recipesDisplayed = "5";
+                //enable the buttons based on which is pressed
+                btn5.setEnabled(false);
+                btn10.setEnabled(true);
+                btn15.setEnabled(true);
+            }
+        });
+        //user changed # of recipes
+        btn10.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                recipeChanged = true;
+                recipesDisplayed = "10";
+                //enable the buttons based on which is pressed
+                btn10.setEnabled(false);
+                btn15.setEnabled(true);
+                btn5.setEnabled(true);
+            }
+        });
+        //user changed # of recipes
+        btn15.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                recipeChanged = true;
+                recipesDisplayed = "15";
+                //enable the buttons based on which is pressed
+                btn15.setEnabled(false);
+                btn10.setEnabled(true);
+                btn5.setEnabled(true);
+            }
+        });
 
+        //user changed Vegan preferences
         toggleButtonVegan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                veganChanged = true;
                 if (toggleButtonVegan.isChecked()) {
                     vegan = "True";
                 }
                 else {
                     vegan = "False";
                 }
-
             }
         });
 
@@ -80,51 +158,79 @@ public class Preferences extends AppCompatActivity implements AdapterView.OnItem
                 UsersRef.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        FirebaseDatabase.getInstance().getReference("Users")
-                                .child(userId).child("name").setValue(edtUser.getText().toString());
+                        //only update if the user entered a new name
+                        if(!edtUser.getText().toString().equals("")) {
+                            FirebaseDatabase.getInstance().getReference("Users")
+                                    .child(userId).child("name").setValue(edtUser.getText().toString());
+                        }
 
-                        FirebaseDatabase.getInstance().getReference("Users")
-                                .child(userId).child("age").setValue(edtUserAge.getText().toString());
+                        //only update if the user entered a new age
+                        if(!edtUserAge.getText().toString().equals("")) {
+                            FirebaseDatabase.getInstance().getReference("Users")
+                                    .child(userId).child("age").setValue(edtUserAge.getText().toString());
+                        }
 
-                        FirebaseDatabase.getInstance().getReference("Users")
-                                .child(userId).child("Recipes Displayed").setValue(recipesDisplayed);
+                        //only update if the user entered # of recipes to display
+                        if(recipeChanged) {
+                            Log.i("TAG","recipes Displayed: "+recipesDisplayed);
+                            FirebaseDatabase.getInstance().getReference("Users")
+                                    .child(userId).child("Recipes Displayed").setValue(recipesDisplayed);
+                            Log.i("TAG", "recipesDisplayed after putting into Firebase: "+recipesDisplayed);
+                        }
 
-                        FirebaseDatabase.getInstance().getReference("Users")
-                                .child(userId).child("Vegan").setValue(vegan);
+                        //only update if the user toggled vegan
+                        if(veganChanged) {
+                            Log.i("TAG","veganChanged: "+veganChanged);
+                            FirebaseDatabase.getInstance().getReference("Users")
+                                    .child(userId).child("Vegan").setValue(vegan);
+                        }
+
+                        //repopulate welcome message
+                        setWelcome();
+                        Toast.makeText(getApplicationContext(),"Preferences Updated!",Toast.LENGTH_LONG).show();
 
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
                     }
                 });
-
             }
         });
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        recipesDisplayed = adapterView.getItemAtPosition(i).toString();
-    }
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-        recipesDisplayed = "10";
-    }
+    private void setWelcome() {
+        //get back user name, age and vegan from database
+        UsersRef.child(userId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String name, age, vegan;
+                name = dataSnapshot.child("name").getValue().toString();
+                age = dataSnapshot.child("age").getValue().toString();
+                vegan = dataSnapshot.child("Vegan").getValue().toString();
 
-
+                if(vegan.equals("True")){
+                    vegan = "vegan.";
+                }else{
+                    vegan = "not vegan.";
+                }
+                //set welcome text
+                txtWelcome.setText("Welcome "+name+", you are age "+age+" years old and you are "+vegan);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
 
     // create menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-//        return super.onCreateOptionsMenu(menu);   //get rid of default behavior.
-
         // Inflate the menu; this adds items to the action bar
         getMenuInflater().inflate(R.menu.my_test_menu, menu);
         return true;
     }
 
-
-
+    //globally shared menu across several activities
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 

@@ -60,11 +60,12 @@ public class eachRecipe extends AppCompatActivity {
     private EditText txtReview;
     private ListAdapter lvAdapter;
     private ListView recipeList, reviewList;
-    private String ingredients, recipeID, recipeName, recipeImageURL;
+    private String ingredients, recipeID, recipeName, recipeImageURL, recipeCuisine;
     private String[] instructionSteps;
     private ImageView image;
     private Intent intent;
     public String[][] tuple;
+    private boolean spotifyBoolean;
     private Context context;
     private int count;
     private int calories;
@@ -75,6 +76,7 @@ public class eachRecipe extends AppCompatActivity {
     private DatabaseReference UsersRef;
     String userId;
 
+    //instantiating Spotify params
     private static final String CLIENT_ID = "7665db3e28e2473aa1bf4b824b15b40a"; //bgzhang@bu.edu spotify acc (original)
     //private static final String CLIENT_ID ="8952e63ad6954705a1ab2e2ce5caa4c2"; //bgzhang2@gmail.com spotify secondary acc
     private static final String REDIRECT_URI = "https://google.com";
@@ -117,7 +119,8 @@ public class eachRecipe extends AppCompatActivity {
         recipeID = intent.getStringExtra("recipeID");
         //populate page with recipe data
         getRecipeData(recipeID);
-
+        //set Spotify boolean to be false
+        spotifyBoolean = false;
         //call helper function with recipeID to fill tuple with reviews from Firebase
         fillTuple(recipeID);
 
@@ -206,8 +209,7 @@ public class eachRecipe extends AppCompatActivity {
         });
 
         btnSpotify.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 ConnectionParams connectionParams =
                         new ConnectionParams.Builder(CLIENT_ID)
                                 .setRedirectUri(REDIRECT_URI)
@@ -220,27 +222,28 @@ public class eachRecipe extends AppCompatActivity {
                             @Override
                             public void onConnected(SpotifyAppRemote spotifyAppRemote) {
                                 mSpotifyAppRemote = spotifyAppRemote;
+                                //toggles Spotify play and pause
+                                if(spotifyBoolean == false){
+                                    spotifyBoolean = true;
+                                }else{
+                                    spotifyBoolean = false;
+                                }
                                 Log.d("MainActivity", "Connected! Yay!");
-
-
                                 connected();
                             }
 
                             @Override
                             public void onFailure(Throwable throwable) {
                                 Log.e("MainActivity", throwable.getMessage(), throwable);
-
-
                             }
-                        });
-
+                        }
+                    );
             }
-
-
         });
 
     }
 
+    //cuisine translation to playlist URI
     private String cuisineToURI(String cuisine)
     {
         cuisine = cuisine.toLowerCase(); //convert user input to all lowercase for switch statement
@@ -329,16 +332,8 @@ public class eachRecipe extends AppCompatActivity {
             default: //default playlist is the American music playlist
                 playlistURI = "spotify:playlist:37i9dQZF1DWTkyF6GNu8Nf";
                 break;
-
-
         }
-
-
         return playlistURI;
-
-
-
-
     }
 
 
@@ -347,7 +342,13 @@ public class eachRecipe extends AppCompatActivity {
         //and pass that into getPlayerApi().play(String URI) below
 
         //obtain playlist URI
-        mSpotifyAppRemote.getPlayerApi().play("spotify:playlist:37i9dQZF1DX7K31D69s4M1"); //placeholder playlist URI: piano music playlist provided by spotify
+        if(spotifyBoolean == true) {
+            mSpotifyAppRemote.getPlayerApi().play(cuisineToURI(recipeCuisine)); //placeholder playlist URI: piano music playlist provided by spotify
+            Toast.makeText(getApplicationContext(), "Spotify Playing " + recipeCuisine + " Inspired Playlist", Toast.LENGTH_LONG).show();
+        }else {
+            mSpotifyAppRemote.getPlayerApi().pause();
+            Toast.makeText(getApplicationContext(), "Spotify Paused " + recipeCuisine + " Inspired Playlist", Toast.LENGTH_LONG).show();
+        }
 
         mSpotifyAppRemote.getPlayerApi()
                 .subscribeToPlayerState()
@@ -560,6 +561,15 @@ public class eachRecipe extends AppCompatActivity {
                             //set recipe name
                             recipeName = (String)response.get("title");
                             txtTitle.setText(recipeName);
+                            //get cuisine type
+                            JSONArray cuisines = response.getJSONArray("cuisines");
+                            if(cuisines.length() == 0){
+                                //setDefault
+                                recipeCuisine = "default";
+                            }else {
+                                recipeCuisine = cuisines.getString(0);
+                                Log.i("TAG", "Recipe cuisine: "+recipeCuisine);
+                            }
                             //set price per servings
                             double price = (double)response.get("pricePerServing")/100;
                             String priceString = "$"+String.format("%.2f", price);

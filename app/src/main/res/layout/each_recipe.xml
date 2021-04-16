@@ -181,13 +181,14 @@
         android:id="@+id/txtReview"
         android:layout_width="265dp"
         android:layout_height="40dp"
+        android:layout_marginBottom="116dp"
         android:ems="10"
         android:hint="Leave a review"
         android:inputType="textPersonName"
         android:textSize="30px"
-        app:layout_constraintBottom_toTopOf="@+id/reviewList"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.026"
+        app:layout_constraintHorizontal_bias="0.068"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
