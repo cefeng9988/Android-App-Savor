@@ -238,6 +238,18 @@ public class SavedRecipes extends AppCompatActivity {
                 public void onClick(View v) {
 
 
+                    UserSavedRecipes.child(userID).child(savedData[position][0]).removeValue();
+
+
+                    // Remove the recipename from the listview selected
+                    ArrayList<String[]> temp = new ArrayList<>(Arrays.asList(savedData));
+                    temp.remove(position);
+                    String[][] buffer = new String[temp.size()][];
+                    savedData = temp.toArray(buffer);
+                    notifyDataSetChanged();
+
+
+
                 }
             });
 
