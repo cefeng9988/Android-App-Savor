@@ -45,7 +45,6 @@ public class MacroTracker extends AppCompatActivity {
     int totalcalories = 0;
 
     ArrayList<String> current_recipeNames = new ArrayList<>();
-
     ArrayList<String> current_calories = new ArrayList<>();
 
     public SharedPreferences pref;
@@ -69,17 +68,11 @@ public class MacroTracker extends AppCompatActivity {
         calories = String.valueOf(intent.getIntExtra("calories",0));
         recipeName = intent.getStringExtra("recipeName");
 
-        Log.i("calories", "calories " + calories);
-        Log.i("recipeName", "recipeName " + recipeName);
-
-
         //retrieve newly added calorie into total/previously stored calories
         int size = pref.getInt(userId + "total_calories_size", 0);
         current_calories = new ArrayList<>(size);
         for(int i=0;i<size;i++)
             current_calories.add(pref.getString(userId + "total_calories" + "_" + i, null));
-
-
 
         //retrieve newly added recipeNames into total/previously stored recipeNames
         int recipeNameSize = pref.getInt(userId + "total_recipes_size", 0);
@@ -87,35 +80,25 @@ public class MacroTracker extends AppCompatActivity {
         for(int i=0;i<size;i++)
             current_recipeNames.add(pref.getString(userId + "total_recipes" + "_" + i, null));
 
-
-
-
-
         // handle case when recipe has 0 calories
-        if (calories.equals("0")) {
+        if (!calories.equals("0")) {
             // scenario when using enters activity through menu or when recipe has calories listed as 0
-        }
-        else{
             current_calories.add(calories);
         }
 
-
-        // handle case when recipe name is null
-        if (recipeName.equals(null)) {
-            // scenario when using enters activity through menu
-        }
-        else{
+        // handle case when recipe name is not null (so app does not add null variables into list)
+        if (recipeName != null) {
             current_recipeNames.add(recipeName);
         }
-
-
-
 
         for(int i = 0; i<current_calories.size(); i++){
             totalcalories += Integer.parseInt(current_calories.get(i));
         }
         txtTotalKcals.setText(String.valueOf(totalcalories));
 
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putInt("totalcalories", totalcalories);
+        editor.apply();
 
         //fill our 2D array of calories and boolean value for setChecked
         listInput = new String[current_calories.size()][2];
@@ -123,7 +106,6 @@ public class MacroTracker extends AppCompatActivity {
             listInput[i][0] = current_calories.get(i);
             listInput[i][1] = "false";
         }
-
 
         //fill our 2D array with recipeNames
         recipelistInput = new String[current_recipeNames.size()];
@@ -145,7 +127,7 @@ public class MacroTracker extends AppCompatActivity {
             public void onClick(View v) {
 
                 listInput = new String[0][2];
-                recipelistInput = new String [0];
+                recipelistInput = new String[0];
                 trackerAdapter = new MacroTrackerAdapter(aContext, listInput, recipelistInput);
                 lvTrackerList.setAdapter(trackerAdapter);
                 current_calories.clear();
@@ -211,6 +193,23 @@ public class MacroTracker extends AppCompatActivity {
 
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        // save ingredients using shared preferences
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putInt(userId + "total_calories_size", current_calories.size());
+        for(int i=0;i<current_calories.size();i++)
+            editor.putString(userId + "total_calories" + "_" + i, current_calories.get(i));
+
+
+        editor.putInt(userId + "total_recipes_size", current_recipeNames.size());
+        for(int i=0;i<current_recipeNames.size();i++)
+            editor.putString(userId + "total_recipes" + "_" + i, current_recipeNames.get(i));
+
+        editor.apply();
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         // save ingredients using shared preferences
@@ -273,6 +272,7 @@ public class MacroTracker extends AppCompatActivity {
 //Now that we have a valid row instance, we need to get references to the views within that row and fill it
             Button btnRecipe = (Button) row.findViewById(R.id.btnRecipe);
             btnRecipe.setText(recipelistInput[position]);
+
             CheckBox checkBox = (CheckBox) row.findViewById(R.id.calorieCheck);
             checkBox.setText(listInput[position][0]);
             checkBox.setChecked(Boolean.parseBoolean(listInput[position][1]));
@@ -281,7 +281,11 @@ public class MacroTracker extends AppCompatActivity {
             checkBox.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listInput[position][1] = "true";
+                    if(listInput[position][1].equals("false")) {
+                        listInput[position][1] = "true";
+                    }else{
+                        listInput[position][1] = "false";
+                    }
                 }
             });
 
@@ -300,11 +304,24 @@ public class MacroTracker extends AppCompatActivity {
                     notifyDataSetChanged();
                     current_calories.remove(position);
 
-                    // update total calories
-                    //totalcalories -= Integer.parseInt(current_calories.get(position));
-                    //txtTotalKcals.setText(String.valueOf(totalcalories));
 
-                    //SAVE SHARED PREF HERE
+                    ArrayList<String> recipetemp = new ArrayList<>(Arrays.asList(recipelistInput));
+                    recipetemp.remove(position);
+                    String[] recipebuffer = new String[recipetemp.size()];
+                    recipelistInput = recipetemp.toArray(recipebuffer);
+                    notifyDataSetChanged();
+                    current_recipeNames.remove(position);
+
+
+                    /*
+                    SharedPreferences pref = getSharedPreferences("pref", Context.MODE_PRIVATE);
+
+                    int kcals = pref.getInt("totalcalories", 0);
+                    // update total calories
+                    kcals -= Integer.parseInt(current_calories.get(position));
+                    //txtTotalKcals.setText(String.valueOf(kcals));
+                    Log.i("kcals", String.valueOf(kcals));
+*/
                 }
             });
 //the row has been inflated and filled with data, return it.
