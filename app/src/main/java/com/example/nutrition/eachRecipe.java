@@ -160,7 +160,7 @@ public class eachRecipe extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         FirebaseDatabase.getInstance().getReference("UserProfiles")
-                                .child(userId).child(recipeID).setValue(recipeName+"#"+txtReview.getText().toString());
+                                .child(userId).child(recipeID).setValue(recipeImageURL+"#"+recipeName+"#"+txtReview.getText().toString());
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {

@@ -1,20 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="60dp">
+    android:layout_height="150dp">
 
 
-    <Button
-        android:id="@+id/btnRecipeName"
-        android:layout_width="160dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:hint="Recipe Name"
-        android:backgroundTint="#AAAAAA"
-        android:textColor="@color/black"
-        android:textSize="30px" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="170dp"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/reviewImage"
+            android:layout_width="182dp"
+            android:layout_height="160dp"
+            android:layout_weight="1"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <Button
+            android:id="@+id/btnRecipeName"
+            android:layout_width="180dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:hint="Recipe Name"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/yellow"
+            android:textSize="25px" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/txtUserReview"
@@ -26,8 +40,8 @@
         android:layout_weight="4"
         android:gravity="center"
         android:text="User Review"
-        android:textColor="#AAAAAA"
-        android:textSize="30px" />
+        android:textColor="@color/black"
+        android:textSize="40px" />
 
 
 </LinearLayout>
