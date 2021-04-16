@@ -86,7 +86,7 @@
         android:layout_marginTop="401dp"
         android:layout_marginEnd="28dp"
         android:layout_marginBottom="85dp"
-        android:text="# of Recipes \n Displayed"
+        android:text="Max # of Recipes \n Displayed"
         android:textSize="45px"
         app:layout_constraintBottom_toTopOf="@+id/txtVeganWarning"
         app:layout_constraintEnd_toStartOf="@+id/btn5"
