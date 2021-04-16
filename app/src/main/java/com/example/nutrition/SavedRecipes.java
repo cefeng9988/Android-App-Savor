@@ -2,6 +2,7 @@ package com.example.nutrition;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,6 +28,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class SavedRecipes extends AppCompatActivity {
     private DatabaseReference UserSavedRecipes;
@@ -101,43 +105,6 @@ public class SavedRecipes extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-
-
-        /*
-        //loop through reviews under userID and save to String[]
-        UserSavedRecipes.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                int count = 0;
-                for (DataSnapshot childDataSnapshot : snapshot.getChildren()) {
-                    count++;
-                }
-                //instantiate our String[] to hold each review data
-                savedData = new String[count][2];
-                int index = 0;
-                for (DataSnapshot childDataSnapshot : snapshot.getChildren()) {
-                    Log.i("TAG","childkey: "+ childDataSnapshot.getKey()); //displays the key for the node
-                    Log.i("TAG","childvalue: "+  snapshot.child(String.valueOf(childDataSnapshot.getKey())).getValue().toString());
-
-                    savedData[index][0] = childDataSnapshot.getKey();
-                    savedData[index][1] = snapshot.child(String.valueOf(childDataSnapshot.getKey())).getValue().toString();
-                    index++;
-                }
-
-                Log.i("TAG","savedData key: "+ savedData[0][0]);
-                Log.i("TAG","savedData value: "+ savedData[0][1]);
-
-                //instantiate adaptor then set ListView with adapter
-                lvAdapter = new MyCustomAdapter(context, savedData);
-                savedProfileList.setAdapter(lvAdapter);
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-
-*/
-
     }
 
 
@@ -158,21 +125,25 @@ public class SavedRecipes extends AppCompatActivity {
 
         int id = item.getItemId();
 
+        // Home page intent
         if (id == R.id.mnu_zero) {
             Intent intent = new Intent(SavedRecipes.this, Spoonacular.class);
             startActivity(intent);
             return true;
         }
+        // Preferences intent
         if (id == R.id.mnu_one) {
             Intent intent = new Intent(SavedRecipes.this, Preferences.class);
             startActivity(intent);
             return true;
         }
+        // SavedRecipes intent
         if (id == R.id.mnu_two) {
             Intent intent = new Intent(SavedRecipes.this, SavedRecipes.class);
             startActivity(intent);
             return true;
         }
+        // ShoppingList intent
         if (id == R.id.mnu_three) {
             Intent intent = new Intent(SavedRecipes.this, ShoppingList.class);
             String[] array = {};
@@ -180,11 +151,13 @@ public class SavedRecipes extends AppCompatActivity {
             startActivity(intent);
             return true;
         }
+        // MacroTracker intent
         if (id == R.id.mnu_four) {
             Intent intent = new Intent(SavedRecipes.this, MacroTracker.class);
             startActivity(intent);
             return true;
         }
+        // Log out intent
         if (id == R.id.mnu_five) {
             Intent intent = new Intent(SavedRecipes.this, Authentication.class);
             startActivity(intent);
@@ -200,6 +173,7 @@ public class SavedRecipes extends AppCompatActivity {
     class MyCustomAdapter extends BaseAdapter {
         Context context;
         String[][] savedData;
+        Button btnRemoveRecipe;
 
         //constructor
         public MyCustomAdapter(Context aContext, String[][] aSavedData) {
@@ -256,6 +230,17 @@ public class SavedRecipes extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
+
+            // remove item
+            btnRemoveRecipe = (Button) row.findViewById(R.id.btnRemoveRecipe);
+            btnRemoveRecipe.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+
+                }
+            });
+
 
             return row;
         }

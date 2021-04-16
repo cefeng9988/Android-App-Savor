@@ -236,7 +236,7 @@ public class ShoppingList extends AppCompatActivity {
             });
 
 // remove item
-            btnRemove = (Button) row.findViewById(R.id.btnRemove);
+            btnRemove = (Button) row.findViewById(R.id.btnRemoveRecipe);
             btnRemove.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
