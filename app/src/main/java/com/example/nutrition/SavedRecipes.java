@@ -54,10 +54,6 @@ public class SavedRecipes extends AppCompatActivity {
         //setting link to correct database
         UserSavedRecipes = FirebaseDatabase.getInstance().getReference().child("UserSavedRecipes");
 
-        //get userID passed from eachRecipes
-        //intent = getIntent();
-        //userID = intent.getStringExtra("userID");
-
         userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         // check if there is a record of saved recipes for a user
@@ -65,8 +61,6 @@ public class SavedRecipes extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 if (snapshot.hasChild(userID)) {
-                    // run some code
-
 
                     //loop through reviews under userID and save to String[]
                     UserSavedRecipes.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -168,7 +162,6 @@ public class SavedRecipes extends AppCompatActivity {
     }
 
 
-
     //our custom adapter that creates Views to populate our Recipe ListView
     class MyCustomAdapter extends BaseAdapter {
         Context context;
@@ -237,18 +230,15 @@ public class SavedRecipes extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
-
+                    // remove the recipe from firebasee
                     UserSavedRecipes.child(userID).child(savedData[position][0]).removeValue();
 
-
-                    // Remove the recipename from the listview selected
+                    // Remove the recipe from the listview
                     ArrayList<String[]> temp = new ArrayList<>(Arrays.asList(savedData));
                     temp.remove(position);
                     String[][] buffer = new String[temp.size()][];
                     savedData = temp.toArray(buffer);
                     notifyDataSetChanged();
-
-
 
                 }
             });
