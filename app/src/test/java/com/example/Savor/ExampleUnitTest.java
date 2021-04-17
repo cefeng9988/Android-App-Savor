@@ -1,4 +1,4 @@
-package com.example.nutrition;
+package com.example.Savor;
 
 import org.junit.Test;
 

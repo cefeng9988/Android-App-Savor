@@ -1,6 +1,6 @@
 //Displays information on the recipe user selected from home page
 //shows ingredients, price, instructions, image, calories
-package com.example.nutrition;
+package com.example.Savor;
 
 import android.content.Context;
 import android.content.Intent;
@@ -48,8 +48,6 @@ import com.spotify.android.appremote.api.ConnectionParams;
 import com.spotify.android.appremote.api.Connector;
 import com.spotify.android.appremote.api.SpotifyAppRemote;
 
-import com.spotify.protocol.client.Subscription;
-import com.spotify.protocol.types.PlayerState;
 import com.spotify.protocol.types.Track;
 
 

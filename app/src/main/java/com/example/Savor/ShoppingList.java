@@ -1,5 +1,5 @@
 //recipe ingredients list, shopping list should be saved in sharedPreferences
-package com.example.nutrition;
+package com.example.Savor;
 
 import android.content.Context;
 import android.content.Intent;

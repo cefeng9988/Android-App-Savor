@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.nutrition">
+    package="com.example.Savor">
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -14,21 +14,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nutrition">
         <uses-library android:name="org.apache.http.legacy" android:required="false" />
-        <activity android:name=".Authentication">
+        <activity android:name="com.example.Savor.Authentication">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NewAccount"></activity>
-        <activity android:name=".Spoonacular"></activity>
-        <activity android:name=".SavedRecipes"></activity>
-        <activity android:name=".eachRecipe"></activity>
-        <activity android:name=".ShoppingList"></activity>
-        <activity android:name=".ReviewProfile"></activity>
-        <activity android:name=".Preferences"></activity>
-        <activity android:name=".MacroTracker"></activity>
+        <activity android:name="com.example.Savor.NewAccount"></activity>
+        <activity android:name="com.example.Savor.Spoonacular"></activity>
+        <activity android:name="com.example.Savor.SavedRecipes"></activity>
+        <activity android:name="com.example.Savor.eachRecipe"></activity>
+        <activity android:name="com.example.Savor.ShoppingList"></activity>
+        <activity android:name="com.example.Savor.ReviewProfile"></activity>
+        <activity android:name="com.example.Savor.Preferences"></activity>
+        <activity android:name="com.example.Savor.MacroTracker"></activity>
     </application>
 
 </manifest>

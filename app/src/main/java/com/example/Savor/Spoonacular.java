@@ -1,11 +1,8 @@
 //Spoonacular powers our recipe search functionality
-package com.example.nutrition;
+package com.example.Savor;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -44,10 +41,6 @@ import com.google.firebase.database.ValueEventListener;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.Arrays;
-
-import javax.crypto.Mac;
 
 public class Spoonacular extends AppCompatActivity {
     private Button btnSubmit1, btnSubmit2;

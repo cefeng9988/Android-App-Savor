@@ -1,11 +1,10 @@
 //page for registration of a new user flow
-package com.example.nutrition;
+package com.example.Savor;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;

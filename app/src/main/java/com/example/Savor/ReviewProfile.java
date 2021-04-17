@@ -1,9 +1,8 @@
 //this activity populates the reviews left by a user
-package com.example.nutrition;
+package com.example.Savor;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;

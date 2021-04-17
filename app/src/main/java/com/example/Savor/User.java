@@ -1,5 +1,5 @@
 //user field file, used for profile/preferences
-package com.example.nutrition;
+package com.example.Savor;
 
 public class User {
 
