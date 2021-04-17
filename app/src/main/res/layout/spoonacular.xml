@@ -14,6 +14,7 @@
         android:layout_marginStart="1dp"
         android:text="What's in your pantry?"
         android:textSize="45px"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/txtEdtIngredients"
         app:layout_constraintStart_toStartOf="@+id/txtEdtIngredients"
         app:layout_constraintTop_toBottomOf="@+id/txtEdtKeyWords" />
@@ -100,6 +101,7 @@
         android:layout_marginTop="38dp"
         android:text="What do you crave?"
         android:textSize="45px"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/txtEdtKeyWords"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
