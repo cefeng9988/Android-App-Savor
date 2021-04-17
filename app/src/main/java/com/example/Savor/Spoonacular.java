@@ -60,6 +60,7 @@ public class Spoonacular extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.spoonacular);
 
+        //boiler plate stuff
         btnSubmit1 = (Button) findViewById(R.id.btnSubmit1);
         btnSubmit2 = (Button) findViewById(R.id.btnSubmit2);
         txtEdtKeyWords = (EditText) findViewById(R.id.txtEdtKeyWords);
