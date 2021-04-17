@@ -1,3 +1,4 @@
+//user preferences page, user can change their name, age, Vegan? and # of recipes to display
 package com.example.Savor;
 
 import android.content.Intent;

@@ -1,4 +1,5 @@
 //this activity populates the reviews left by a user
+//Recipe's name, image and review left
 package com.example.Savor;
 
 import android.content.Context;

@@ -1,4 +1,4 @@
-//recipe ingredients list, shopping list should be saved in sharedPreferences
+//Shopping List, all saved in sharedPreferences with userID
 package com.example.Savor;
 
 import android.content.Context;

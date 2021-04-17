@@ -1,4 +1,5 @@
-//Spoonacular powers our recipe search functionality
+//Spoonacular powers our recipe search functionality, acts as our home page
+//Search recipes by query or by ingredients
 package com.example.Savor;
 
 import android.content.Context;

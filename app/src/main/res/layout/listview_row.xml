@@ -10,7 +10,7 @@
         android:layout_height="150dp"
         android:gravity="center"
         tools:srcCompat="@tools:sample/avatars" />
-    <!--        android:src="@drawable/livelong_prosper"-->
+
     <TextView
         android:id="@+id/userReview"
         android:layout_width="0dp"

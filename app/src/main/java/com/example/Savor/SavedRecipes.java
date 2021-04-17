@@ -1,3 +1,5 @@
+//displays user's saved recipes name and image along with remove functionality
+//saved in Firebase
 package com.example.Savor;
 
 import android.content.Context;

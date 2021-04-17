@@ -1,4 +1,4 @@
-//page for registration of a new user flow
+//User registration page
 package com.example.Savor;
 
 import androidx.annotation.NonNull;
