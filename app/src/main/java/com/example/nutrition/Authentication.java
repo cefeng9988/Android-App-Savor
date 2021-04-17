@@ -1,6 +1,7 @@
 //Starting file where user logs in/create new account
 package com.example.nutrition;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 import android.content.Intent;
 
@@ -19,7 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 
 public class Authentication extends AppCompatActivity {
-
+    private ImageView logoImage;
     private EditText edtEmail;
     private EditText edtPass;
     private Button btnLogin;
@@ -37,10 +39,14 @@ public class Authentication extends AppCompatActivity {
         // create firebase authentication instance
         mAuth = FirebaseAuth.getInstance();
 
+        logoImage = (ImageView) findViewById(R.id.logoImage);
         edtEmail = (EditText) findViewById(R.id.edtEmail);
         edtPass = (EditText) findViewById(R.id.edtPass);
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnCreate = (Button) findViewById(R.id.btnCreate);
+
+        //set Logo Image
+        logoImage.setImageResource(R.drawable.savor_icon);
 
         //button log in listener
         btnLogin.setOnClickListener(new View.OnClickListener() {

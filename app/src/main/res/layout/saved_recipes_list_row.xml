@@ -4,9 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="60dp">
-
-
-
     <Button
         android:backgroundTint="@color/yellow"
         android:textColor="@color/white"
@@ -17,14 +14,13 @@
         android:gravity="center"
         android:hint="Recipe Name"
         android:textSize="30px" />
-
     <ImageView
         android:id="@+id/imageView"
+        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         tools:srcCompat="@tools:sample/avatars" />
-
     <Button
         android:id="@+id/btnRemoveRecipe"
         android:layout_width="wrap_content"
@@ -34,6 +30,4 @@
         android:text="REMOVE"
         android:textSize="30px"
         android:layout_gravity="center_vertical" />
-
-
 </LinearLayout>
