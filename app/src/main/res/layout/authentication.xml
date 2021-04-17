@@ -6,16 +6,17 @@
     android:orientation="vertical"
     android:background="@drawable/background"
     tools:context=".Authentication">
+
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Savor"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
-        android:textColor="#265281"
+        android:text="Savor"
+        android:textColor="#E3D137"
         android:textSize="30sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
     <ImageView
         android:id="@+id/logoImage"
         android:layout_width="272dp"
@@ -61,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName" />
+            android:inputType="textPassword"/>
     </LinearLayout>>
     <TextView
         android:layout_width="wrap_content"
