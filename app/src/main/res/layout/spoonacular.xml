@@ -1,109 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
     android:background="@drawable/background"
     tools:context=".Spoonacular">
+    <TextView
+        android:id="@+id/txtHintCrave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="What do you crave?"
+        android:textColor="@color/black"
+        android:textSize="45px" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/txtEdtKeyWords"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:layout_weight="1"
+            android:hint="Enter Food/Cuisine"
+            android:inputType="textPersonName"
+            android:textSize="35px"/>
+        <Button
+            android:id="@+id/btnSubmit1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Submit" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/txtHintPantry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="1dp"
         android:text="What's in your pantry?"
         android:textSize="45px"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/txtEdtIngredients"
-        app:layout_constraintStart_toStartOf="@+id/txtEdtIngredients"
-        app:layout_constraintTop_toBottomOf="@+id/txtEdtKeyWords" />
+        android:textColor="@color/black"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/txtEdtIngredients"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:layout_weight="1"
+            android:hint="Enter Ingredients Split by Commas"
+            android:inputType="textPersonName"
+            android:textSize="35px" />
+        <Button
+            android:id="@+id/btnSubmit2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Submit"/>
+
+    </LinearLayout>
     <ListView
         android:id="@+id/recipeList"
-        android:layout_width="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="30dp"
-        android:fastScrollAlwaysVisible="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSubmit2" />
-
-    <EditText
-        android:id="@+id/txtEdtKeyWords"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="26dp"
-        android:layout_marginEnd="23dp"
-        android:layout_marginBottom="32dp"
-        android:ems="10"
-        android:hint="Enter Food/Cuisine"
-        android:inputType="textPersonName"
-        android:textSize="35px"
-        app:layout_constraintBottom_toTopOf="@+id/txtHintPantry"
-        app:layout_constraintEnd_toStartOf="@+id/btnSubmit1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtHintCrave" />
-
-    <Button
-        android:id="@+id/btnSubmit2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="18dp"
-        android:backgroundTint="@color/yellow"
-        android:text="Submit"
-        app:layout_constraintBottom_toTopOf="@+id/recipeList"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txtEdtIngredients"
-        app:layout_constraintTop_toBottomOf="@+id/btnSubmit1" />
-
-    <EditText
-        android:id="@+id/txtEdtIngredients"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="19dp"
-        android:ems="10"
-        android:hint="Enter Ingredients Split by Commas"
-        android:inputType="textPersonName"
-        android:textSize="35px"
-        app:layout_constraintBottom_toTopOf="@+id/recipeList"
-        app:layout_constraintEnd_toStartOf="@+id/btnSubmit2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtHintPantry" />
-
-    <Button
-        android:id="@+id/btnSubmit1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="61dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="52dp"
-        android:backgroundTint="@color/yellow"
-        android:text="Submit"
-        app:layout_constraintBottom_toTopOf="@+id/btnSubmit2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txtEdtKeyWords"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/txtHintCrave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="38dp"
-        android:text="What do you crave?"
-        android:textSize="45px"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/txtEdtKeyWords"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_weight="1"
+        android:fastScrollAlwaysVisible="false" />
+</LinearLayout>
