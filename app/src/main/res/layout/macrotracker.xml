@@ -5,13 +5,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/background">
+
     <TextView
         android:id="@+id/txtShoppingList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-        android:text="Macro Tracker"
+        android:text="Calorie Tracker"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
     <ListView
         android:id="@+id/lvTrackerList"

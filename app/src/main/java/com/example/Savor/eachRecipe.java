@@ -241,100 +241,7 @@ public class eachRecipe extends AppCompatActivity {
 
     }
 
-    //cuisine translation to playlist URI
-    private String cuisineToURI(String cuisine)
-    {
-        cuisine = cuisine.toLowerCase(); //convert user input to all lowercase for switch statement
-        String playlistURI = "";
-
-        switch (cuisine)
-        {
-            case "african":
-                playlistURI = "spotify:playlist:7snw0knGkLp2sbOmtxM4bK";
-                break;
-            case "american":
-                playlistURI = "spotify:playlist:37i9dQZF1DWTkyF6GNu8Nf";
-                break;
-            case "british":
-                playlistURI = "spotify:playlist:1y7E5GXSac77FzesM2ASjx";
-                break;
-            case "cajun":
-                playlistURI = "spotify:playlist:2KmefvmYGgMH8fvkHLWHse";
-                break;
-            case "caribbean":
-                playlistURI = "spotify:playlist:2jQDPMUh81UWuXqRufi8qO";
-                break;
-            case "chinese":
-                playlistURI = "spotify:playlist:6QCOn8cCy7Nwa2oyhHtfB4";
-                break;
-            case "eastern european":
-                playlistURI = "spotify:playlist:0s62ty61GFrKxbIg8jyszo";
-                break;
-            case "european":
-                playlistURI = "spotify:playlist:5WYL1hyCX32ufeAseT8die";
-                break;
-            case "french":
-                playlistURI = "spotify:playlist:4TT7cOqojq7JeDMiQwTA9Z";
-                break;
-            case "german":
-                playlistURI = "spotify:playlist:7Cdk1T18F4mJKNPJxmP8o3";
-                break;
-            case "greek":
-                playlistURI = "spotify:playlist:2pozvQaElyGIHFbD1TP2Fw";
-                break;
-            case "indian":
-                playlistURI = "spotify:playlist:4s6aflkIZ5mTub2uJ3esj3";
-                break;
-            case "irish":
-                playlistURI = "spotify:playlist:5aSO2lT7sVPKut6F9L6IAc";
-                break;
-            case "italian":
-                playlistURI = "spotify:playlist:4VuLgMrMzBynB4hcMCmYWa";
-                break;
-            case "japanese":
-                playlistURI = "spotify:playlist:5q6ztbyqMoAEx9AaR1Y442";
-                break;
-            case "jewish":
-                playlistURI = "spotify:playlist:3bvTqM2UeFVOh9vKEu3m1Y";
-                break;
-            case "korean":
-                playlistURI = "spotify:playlist:6Rb4Ff5UQttjCAEN7qwXyR";
-                break;
-            case "latin american":
-                playlistURI = "spotify:playlist:37i9dQZF1DX5qGup0t1SY0";
-                break;
-            case "mediterranean":
-                playlistURI = "spotify:playlist:1pKpHwwvfOjTh7PBxVV15Q";
-                break;
-            case "mexican":
-                playlistURI = "spotify:playlist:7nAsFP11mQLJWrZ8uQbpM0";
-                break;
-            case "middle eastern":
-                playlistURI = "spotify:playlist:5E7yzLgfs3WyEtvJtjmLPA";
-                break;
-            case "nordic":
-                playlistURI = "spotify:playlist:2ArQdshMTWzfI8OZQiP7tj";
-                break;
-            case "southern":
-                playlistURI = "spotify:playlist:1JEnLyj9epkZJbWNuw0DIQ";
-                break;
-            case "spanish":
-                playlistURI = "spotify:playlist:2tbpZ1Cj6K7SoUgh8KgeWg";
-                break;
-            case "thai":
-                playlistURI = "spotify:playlist:2jSVf5LHKV2udoHp6Tvt5C";
-                break;
-            case "vietnamese":
-                playlistURI = "spotify:playlist:4VfiJMSRNZqW6ZOH01CmKQ";
-                break;
-            default: //default playlist is the American music playlist
-                playlistURI = "spotify:playlist:37i9dQZF1DWTkyF6GNu8Nf";
-                break;
-        }
-        return playlistURI;
-    }
-
-
+    //connect to Spotify on user's phone
     private void connected() {
         //retrieve cuisine String here and pass it into the helper method, and then take the returned playlistURI string
         //and pass that into getPlayerApi().play(String URI) below
@@ -546,7 +453,7 @@ public class eachRecipe extends AppCompatActivity {
         //shares global ingredients, used to store ingredients from API
         ingredients = "";
 
-        String URL = "https://api.spoonacular.com/recipes/" + recipeId + "/information?apiKey=f80bf47afa2549c2bad353d39505fe4c";
+        String URL = "https://api.spoonacular.com/recipes/" + recipeId + "/information?apiKey=dd793461a528467ea868354b99c02d9b";
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         // grabs json object from api
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
@@ -642,5 +549,98 @@ public class eachRecipe extends AppCompatActivity {
         }catch(Exception e){
         }
         return calories;
+    }
+
+    //cuisine translation to playlist URI
+    private String cuisineToURI(String cuisine)
+    {
+        cuisine = cuisine.toLowerCase(); //convert user input to all lowercase for switch statement
+        String playlistURI = "";
+
+        switch (cuisine)
+        {
+            case "african":
+                playlistURI = "spotify:playlist:7snw0knGkLp2sbOmtxM4bK";
+                break;
+            case "american":
+                playlistURI = "spotify:playlist:37i9dQZF1DWTkyF6GNu8Nf";
+                break;
+            case "british":
+                playlistURI = "spotify:playlist:1y7E5GXSac77FzesM2ASjx";
+                break;
+            case "cajun":
+                playlistURI = "spotify:playlist:2KmefvmYGgMH8fvkHLWHse";
+                break;
+            case "caribbean":
+                playlistURI = "spotify:playlist:2jQDPMUh81UWuXqRufi8qO";
+                break;
+            case "chinese":
+                playlistURI = "spotify:playlist:6QCOn8cCy7Nwa2oyhHtfB4";
+                break;
+            case "eastern european":
+                playlistURI = "spotify:playlist:0s62ty61GFrKxbIg8jyszo";
+                break;
+            case "european":
+                playlistURI = "spotify:playlist:5WYL1hyCX32ufeAseT8die";
+                break;
+            case "french":
+                playlistURI = "spotify:playlist:4TT7cOqojq7JeDMiQwTA9Z";
+                break;
+            case "german":
+                playlistURI = "spotify:playlist:7Cdk1T18F4mJKNPJxmP8o3";
+                break;
+            case "greek":
+                playlistURI = "spotify:playlist:2pozvQaElyGIHFbD1TP2Fw";
+                break;
+            case "indian":
+                playlistURI = "spotify:playlist:4s6aflkIZ5mTub2uJ3esj3";
+                break;
+            case "irish":
+                playlistURI = "spotify:playlist:5aSO2lT7sVPKut6F9L6IAc";
+                break;
+            case "italian":
+                playlistURI = "spotify:playlist:4VuLgMrMzBynB4hcMCmYWa";
+                break;
+            case "japanese":
+                playlistURI = "spotify:playlist:5q6ztbyqMoAEx9AaR1Y442";
+                break;
+            case "jewish":
+                playlistURI = "spotify:playlist:3bvTqM2UeFVOh9vKEu3m1Y";
+                break;
+            case "korean":
+                playlistURI = "spotify:playlist:6Rb4Ff5UQttjCAEN7qwXyR";
+                break;
+            case "latin american":
+                playlistURI = "spotify:playlist:37i9dQZF1DX5qGup0t1SY0";
+                break;
+            case "mediterranean":
+                playlistURI = "spotify:playlist:1pKpHwwvfOjTh7PBxVV15Q";
+                break;
+            case "mexican":
+                playlistURI = "spotify:playlist:7nAsFP11mQLJWrZ8uQbpM0";
+                break;
+            case "middle eastern":
+                playlistURI = "spotify:playlist:5E7yzLgfs3WyEtvJtjmLPA";
+                break;
+            case "nordic":
+                playlistURI = "spotify:playlist:2ArQdshMTWzfI8OZQiP7tj";
+                break;
+            case "southern":
+                playlistURI = "spotify:playlist:1JEnLyj9epkZJbWNuw0DIQ";
+                break;
+            case "spanish":
+                playlistURI = "spotify:playlist:2tbpZ1Cj6K7SoUgh8KgeWg";
+                break;
+            case "thai":
+                playlistURI = "spotify:playlist:2jSVf5LHKV2udoHp6Tvt5C";
+                break;
+            case "vietnamese":
+                playlistURI = "spotify:playlist:4VfiJMSRNZqW6ZOH01CmKQ";
+                break;
+            default: //default playlist is the American music playlist
+                playlistURI = "spotify:playlist:37i9dQZF1DWTkyF6GNu8Nf";
+                break;
+        }
+        return playlistURI;
     }
 }
