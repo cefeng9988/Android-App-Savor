@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -181,27 +182,33 @@ public class Spoonacular extends AppCompatActivity {
     private void fillListObject(JSONObject response) {
         //get/display ingredients
         try {
-            recipeLength = response.getInt("totalResults");
-            //covers less than designated recipes but does not exceed it
-            if(recipeLength>Integer.parseInt(recipesDisplayed)){
-                recipeLength = Integer.parseInt(recipesDisplayed);
-            }
-            String[][] tuple = new String[recipeLength][3];
-            JSONArray arr = response.getJSONArray("results");
-            for(int i = 0; i<recipeLength; i++){
-                //fill 2D array with tuples of image+recipe name
-                String name = arr.getJSONObject(i).getString("title");
-                String getImage = arr.getJSONObject(i).getString("image");
-                String getID = arr.getJSONObject(i).getString("id");
-                tuple[i][0] = name;
-                tuple[i][1] = getImage;
-                tuple[i][2] = getID;
-            }
+            //error catching
+            if(response.getJSONArray("results").length() == 0){
+                ArrayAdapter reviewAdapter = new ArrayAdapter<String>(Spoonacular.this, android.R.layout.simple_list_item_1, new String[]{"Unfortunately there are no results available","Please try a new search"});
+                recipeList.setAdapter(reviewAdapter);
+            }else {
+                recipeLength = response.getInt("totalResults");
+                //covers less than designated recipes but does not exceed it
+                if (recipeLength > Integer.parseInt(recipesDisplayed)) {
+                    recipeLength = Integer.parseInt(recipesDisplayed);
+                }
+                String[][] tuple = new String[recipeLength][3];
+                JSONArray arr = response.getJSONArray("results");
+                for (int i = 0; i < recipeLength; i++) {
+                    //fill 2D array with tuples of image+recipe name
+                    String name = arr.getJSONObject(i).getString("title");
+                    String getImage = arr.getJSONObject(i).getString("image");
+                    String getID = arr.getJSONObject(i).getString("id");
+                    tuple[i][0] = name;
+                    tuple[i][1] = getImage;
+                    tuple[i][2] = getID;
+                }
 
-            //create instance of MyCustomAdapter and pass in the 2D array of tuples
-            //code the MyCustomAdapter class and set constructor like example in Lect7_CustomListView
-            lvAdapter = new MyCustomAdapter(this.getBaseContext(), tuple);
-            recipeList.setAdapter(lvAdapter);
+                //create instance of MyCustomAdapter and pass in the 2D array of tuples
+                //code the MyCustomAdapter class and set constructor like example in Lect7_CustomListView
+                lvAdapter = new MyCustomAdapter(this.getBaseContext(), tuple);
+                recipeList.setAdapter(lvAdapter);
+            }
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -212,29 +219,35 @@ public class Spoonacular extends AppCompatActivity {
     private void fillListArray(JSONArray response) {
         //get/display ingredients
         try{
-            recipeLength = response.length();
-            //covers less than designated recipes but does not exceed it
-            if(recipeLength>Integer.parseInt(recipesDisplayed)){
-                recipeLength = Integer.parseInt(recipesDisplayed);
-            }
-            String[][] tuple = new String[recipeLength][3];
-            for(int i = 0; i<recipeLength; i++) {
-                //get each JSONObject from JSONArray
-                JSONObject object = response.getJSONObject(i);
-                //get name, image and id
-                String name = object.getString("title");
-                String getImage = object.getString("image");
-                String getID = object.getString("id");
-                //fill tuple
-                tuple[i][0] = name;
-                tuple[i][1] = getImage;
-                tuple[i][2] = getID;
-            }
+            //error catching
+            if(response.length() == 0){
+                ArrayAdapter reviewAdapter = new ArrayAdapter<String>(Spoonacular.this, android.R.layout.simple_list_item_1, new String[]{"Unfortunately there are no results available","Please try a new search"});
+                recipeList.setAdapter(reviewAdapter);
+            }else {
+                recipeLength = response.length();
+                //covers less than designated recipes but does not exceed it
+                if (recipeLength > Integer.parseInt(recipesDisplayed)) {
+                    recipeLength = Integer.parseInt(recipesDisplayed);
+                }
+                String[][] tuple = new String[recipeLength][3];
+                for (int i = 0; i < recipeLength; i++) {
+                    //get each JSONObject from JSONArray
+                    JSONObject object = response.getJSONObject(i);
+                    //get name, image and id
+                    String name = object.getString("title");
+                    String getImage = object.getString("image");
+                    String getID = object.getString("id");
+                    //fill tuple
+                    tuple[i][0] = name;
+                    tuple[i][1] = getImage;
+                    tuple[i][2] = getID;
+                }
 
-            //create instance of MyCustomAdapter and pass in the 2D array of tuples
-            //code the MyCustomAdapter class and set constructor like example in Lect7_CustomListView
-            lvAdapter = new MyCustomAdapter(this.getBaseContext(), tuple);
-            recipeList.setAdapter(lvAdapter);
+                //create instance of MyCustomAdapter and pass in the 2D array of tuples
+                //code the MyCustomAdapter class and set constructor like example in Lect7_CustomListView
+                lvAdapter = new MyCustomAdapter(this.getBaseContext(), tuple);
+                recipeList.setAdapter(lvAdapter);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }

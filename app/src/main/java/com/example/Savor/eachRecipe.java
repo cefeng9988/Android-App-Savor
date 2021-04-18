@@ -342,9 +342,6 @@ public class eachRecipe extends AppCompatActivity {
                 int index = 0;
                 //loops through reviews saved and adds key/value to our tupleCopy
                 for (DataSnapshot childDataSnapshot : dataSnapshot.getChildren()) {
-//                    Log.i("TAG","childkey: "+ childDataSnapshot.getKey()); //displays the key for the node
-//                    Log.i("TAG","childvalue: "+  dataSnapshot.child(String.valueOf(childDataSnapshot.getKey())).getValue().toString());
-
                     tupleCopy[index][0] = childDataSnapshot.getKey();
                     tupleCopy[index][1] = dataSnapshot.child(String.valueOf(childDataSnapshot.getKey())).getValue().toString();
                     index++;
