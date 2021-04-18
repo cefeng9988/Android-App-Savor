@@ -127,16 +127,16 @@ public class NewAccount extends AppCompatActivity {
                                                 //default vegan
                                                 FirebaseDatabase.getInstance().getReference("Users")
                                                         .child(userId).child("Vegan").setValue("False");
+
+                                                //upon successful registration, route to home page
+                                                Intent intent = new Intent(NewAccount.this, Spoonacular.class);
+                                                startActivity(intent);
+                                                Toast.makeText(NewAccount.this, "User has been registered successfully", Toast.LENGTH_LONG).show();
                                             }
                                             @Override
                                             public void onCancelled(@NonNull DatabaseError error) {
                                             }
                                         });
-
-                                        //upon successful registration, route to home page
-                                        Intent intent = new Intent(NewAccount.this, Spoonacular.class);
-                                        startActivity(intent);
-                                        Toast.makeText(NewAccount.this, "User has been registered successfully", Toast.LENGTH_LONG).show();
                                     }
                                     else{
                                         //failed registration Toast

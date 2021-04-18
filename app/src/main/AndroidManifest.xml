@@ -13,22 +13,32 @@
         android:roundIcon="@mipmap/ic_savor_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Nutrition">
+
         <uses-library android:name="org.apache.http.legacy" android:required="false" />
-        <activity android:name="com.example.Savor.Authentication">
+        <activity android:name="com.example.Savor.Authentication"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.Savor.NewAccount"></activity>
-        <activity android:name="com.example.Savor.Spoonacular"></activity>
-        <activity android:name="com.example.Savor.SavedRecipes"></activity>
-        <activity android:name="com.example.Savor.eachRecipe"></activity>
-        <activity android:name="com.example.Savor.ShoppingList"></activity>
-        <activity android:name="com.example.Savor.ReviewProfile"></activity>
-        <activity android:name="com.example.Savor.Preferences"></activity>
-        <activity android:name="com.example.Savor.MacroTracker"></activity>
+        <activity android:name="com.example.Savor.NewAccount"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name="com.example.Savor.Spoonacular"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name="com.example.Savor.SavedRecipes"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name="com.example.Savor.eachRecipe"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name="com.example.Savor.ShoppingList"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name="com.example.Savor.ReviewProfile"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name="com.example.Savor.Preferences"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name="com.example.Savor.MacroTracker"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

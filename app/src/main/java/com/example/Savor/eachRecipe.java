@@ -89,6 +89,7 @@ public class eachRecipe extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.each_recipe);
 
+        //boiler plate stuff
         txtTitle = (TextView) findViewById(R.id.txtTitle);
         txtCaloriesDisplay = (TextView) findViewById(R.id.txtCaloriesDisplay);
         txtPriceDisplay = (TextView) findViewById(R.id.txtPriceDisplay);
@@ -180,6 +181,7 @@ public class eachRecipe extends AppCompatActivity {
             }
         });
 
+        //button listener for saving a recipe
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -206,6 +208,7 @@ public class eachRecipe extends AppCompatActivity {
             }
         });
 
+        //button listener for Spotify play
         btnSpotify.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 ConnectionParams connectionParams =
@@ -271,15 +274,12 @@ public class eachRecipe extends AppCompatActivity {
 // create menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-//        return super.onCreateOptionsMenu(menu);   //get rid of default behavior.
-
         // Inflate the menu; this adds items to the action bar
         getMenuInflater().inflate(R.menu.my_test_menu, menu);
         return true;
     }
 
-
-
+    //menu actions for each menu and routing to different activities
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 

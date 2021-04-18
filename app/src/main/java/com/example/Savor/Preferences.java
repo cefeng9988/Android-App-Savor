@@ -85,7 +85,6 @@ public class Preferences extends AppCompatActivity {
                     btn10.setEnabled(true);
                     btn5.setEnabled(true);
                 }
-                Log.i("TAG", "recipesDisplayed from Firebase: "+recipesDisplayed);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -171,12 +170,10 @@ public class Preferences extends AppCompatActivity {
                             Log.i("TAG","recipes Displayed: "+recipesDisplayed);
                             FirebaseDatabase.getInstance().getReference("Users")
                                     .child(userId).child("Recipes Displayed").setValue(recipesDisplayed);
-                            Log.i("TAG", "recipesDisplayed after putting into Firebase: "+recipesDisplayed);
                         }
 
                         //only update if the user toggled vegan
                         if(veganChanged) {
-                            Log.i("TAG","veganChanged: "+veganChanged);
                             FirebaseDatabase.getInstance().getReference("Users")
                                     .child(userId).child("Vegan").setValue(vegan);
                         }

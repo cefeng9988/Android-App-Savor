@@ -81,16 +81,10 @@ public class ReviewProfile extends AppCompatActivity {
                 reviewData = new String[count][2];
                 int index = 0;
                 for (DataSnapshot childDataSnapshot : snapshot.getChildren()) {
-                    Log.i("TAG","childkey: "+ childDataSnapshot.getKey()); //displays the key for the node
-                    Log.i("TAG","childvalue: "+  snapshot.child(String.valueOf(childDataSnapshot.getKey())).getValue().toString());
-
                     reviewData[index][0] = childDataSnapshot.getKey();
                     reviewData[index][1] = snapshot.child(String.valueOf(childDataSnapshot.getKey())).getValue().toString();
                     index++;
                 }
-
-                Log.i("TAG","reviewData key: "+ reviewData[0][0]);
-                Log.i("TAG","reviewData value: "+ reviewData[0][1]);
 
                 //instantiate adaptor then set ListView with adapter
                 lvAdapter = new MyCustomAdapter(context, reviewData);
@@ -107,14 +101,12 @@ public class ReviewProfile extends AppCompatActivity {
     // create menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-//        return super.onCreateOptionsMenu(menu);   //get rid of default behavior.
-
         // Inflate the menu; this adds items to the action bar
         getMenuInflater().inflate(R.menu.my_test_menu, menu);
         return true;
     }
 
-
+    //menu actions and routing to different activities
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 

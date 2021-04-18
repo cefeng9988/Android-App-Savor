@@ -243,8 +243,6 @@ public class SavedRecipes extends AppCompatActivity {
 
                 }
             });
-
-
             return row;
         }
     }

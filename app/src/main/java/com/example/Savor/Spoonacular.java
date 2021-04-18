@@ -122,11 +122,7 @@ public class Spoonacular extends AppCompatActivity {
                 }
             }
         });
-
-
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -137,8 +133,7 @@ public class Spoonacular extends AppCompatActivity {
         return true;
     }
 
-
-
+    //menu routing to different activities
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -201,9 +196,6 @@ public class Spoonacular extends AppCompatActivity {
                 tuple[i][0] = name;
                 tuple[i][1] = getImage;
                 tuple[i][2] = getID;
-                Log.i("TAG", "tuple["+i+"][0]: "+tuple[i][0]);
-                Log.i("TAG", "tuple["+i+"][1]: "+tuple[i][1]);
-                Log.i("TAG", "tuple["+i+"][2]: "+tuple[i][2]);
             }
 
             //create instance of MyCustomAdapter and pass in the 2D array of tuples

@@ -101,15 +101,12 @@ public class ShoppingList extends AppCompatActivity {
 // create menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-//        return super.onCreateOptionsMenu(menu);   //get rid of default behavior.
-
         // Inflate the menu; this adds items to the action bar
         getMenuInflater().inflate(R.menu.my_test_menu, menu);
         return true;
     }
 
-
-
+    //menu routing to different activities
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -151,11 +148,10 @@ public class ShoppingList extends AppCompatActivity {
         return super.onOptionsItemSelected(item);  //if none of the above are true, do the default and return a boolean.
     }
 
-
+    //saving to Shared Preferences
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.i("TAG", "onDestroy HIT HERE");
         // save ingredients using shared preferences
         SharedPreferences.Editor editor = pref.edit();
         editor.putInt(userId + "total_ingredients_size", current_ingredients.size());
@@ -165,6 +161,7 @@ public class ShoppingList extends AppCompatActivity {
         editor.apply();
     }
 
+    //saving to Shared Preferences
     @Override
     protected void onPause() {
         super.onPause();
@@ -178,6 +175,7 @@ public class ShoppingList extends AppCompatActivity {
         editor.apply();
     }
 
+    //filling our custom adapter
     class ShoppingListAdapter extends BaseAdapter {
         private
         String[][] listInput;
@@ -247,8 +245,6 @@ public class ShoppingList extends AppCompatActivity {
                     listInput = temp.toArray(buffer);
                     notifyDataSetChanged();
                     current_ingredients.remove(position);
-
-                    //SAVE SHARED PREF HERE
                 }
             });
 //the row has been inflated and filled with data, return it.
