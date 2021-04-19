@@ -19,4 +19,33 @@
         <item>20</item>
     </string-array>
 
+    <string name="african">spotify:playlist:7snw0knGkLp2sbOmtxM4bK</string>
+    <string name="american">spotify:playlist:37i9dQZF1DWTkyF6GNu8Nf</string>
+    <string name="british">spotify:playlist:1y7E5GXSac77FzesM2ASjx</string>
+    <string name="cajun">spotify:playlist:2KmefvmYGgMH8fvkHLWHse</string>
+    <string name="caribbean">spotify:playlist:2jQDPMUh81UWuXqRufi8qO</string>
+    <string name="chinese">spotify:playlist:6QCOn8cCy7Nwa2oyhHtfB4</string>
+    <string name="eastern_european">spotify:playlist:0s62ty61GFrKxbIg8jyszo</string>
+    <string name="european">spotify:playlist:5WYL1hyCX32ufeAseT8die</string>
+    <string name="french">spotify:playlist:4TT7cOqojq7JeDMiQwTA9Z</string>
+    <string name="german">spotify:playlist:7Cdk1T18F4mJKNPJxmP8o3</string>
+    <string name="greek">spotify:playlist:2pozvQaElyGIHFbD1TP2Fw</string>
+    <string name="indian">spotify:playlist:4s6aflkIZ5mTub2uJ3esj3</string>
+    <string name="irish">spotify:playlist:5aSO2lT7sVPKut6F9L6IAc</string>
+    <string name="italian">spotify:playlist:4VuLgMrMzBynB4hcMCmYWa</string>
+    <string name="japanese">spotify:playlist:5q6ztbyqMoAEx9AaR1Y442</string>
+    <string name="jewish">spotify:playlist:3bvTqM2UeFVOh9vKEu3m1Y</string>
+    <string name="korean">spotify:playlist:6Rb4Ff5UQttjCAEN7qwXyR</string>
+    <string name="latin_american">spotify:playlist:37i9dQZF1DX5qGup0t1SY0</string>
+    <string name="mediterranean">spotify:playlist:1pKpHwwvfOjTh7PBxVV15Q</string>
+    <string name="mexican">spotify:playlist:7nAsFP11mQLJWrZ8uQbpM0</string>
+    <string name="middle_eastern">spotify:playlist:5E7yzLgfs3WyEtvJtjmLPA</string>
+    <string name="nordic">spotify:playlist:2ArQdshMTWzfI8OZQiP7tj</string>
+    <string name="southern">spotify:playlist:1JEnLyj9epkZJbWNuw0DIQ</string>
+    <string name="spanish">spotify:playlist:2tbpZ1Cj6K7SoUgh8KgeWg</string>
+    <string name="thai">spotify:playlist:2jSVf5LHKV2udoHp6Tvt5C</string>
+    <string name="vietnamese">spotify:playlist:4VfiJMSRNZqW6ZOH01CmKQ</string>
+    <string name="generic">spotify:playlist:37i9dQZF1DWTkyF6GNu8Nf</string>
+
+
 </resources>
