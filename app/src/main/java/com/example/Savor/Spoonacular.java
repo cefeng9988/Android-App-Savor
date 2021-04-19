@@ -186,7 +186,7 @@ public class Spoonacular extends AppCompatActivity {
             if(response.getJSONArray("results").length() == 0){
                 ArrayAdapter reviewAdapter = new ArrayAdapter<String>(Spoonacular.this, android.R.layout.simple_list_item_1, new String[]{"Unfortunately there are no results available","Please try a new search"});
                 recipeList.setAdapter(reviewAdapter);
-            }else {
+            } else {
                 recipeLength = response.getInt("totalResults");
                 //covers less than designated recipes but does not exceed it
                 if (recipeLength > Integer.parseInt(recipesDisplayed)) {
@@ -223,7 +223,12 @@ public class Spoonacular extends AppCompatActivity {
             if(response.length() == 0){
                 ArrayAdapter reviewAdapter = new ArrayAdapter<String>(Spoonacular.this, android.R.layout.simple_list_item_1, new String[]{"Unfortunately there are no results available","Please try a new search"});
                 recipeList.setAdapter(reviewAdapter);
-            }else {
+            }
+            //error catching for exceeding Spoonacular daily call quota
+            else if(response.length() == 1){
+                ArrayAdapter reviewAdapter = new ArrayAdapter<String>(Spoonacular.this, android.R.layout.simple_list_item_1, new String[]{"Unfortunately you have exceeded the daily search quota","Please try again some other time"});
+                recipeList.setAdapter(reviewAdapter);
+            } else {
                 recipeLength = response.length();
                 //covers less than designated recipes but does not exceed it
                 if (recipeLength > Integer.parseInt(recipesDisplayed)) {
@@ -330,6 +335,10 @@ public class Spoonacular extends AppCompatActivity {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     Log.i("the res is error:",error.toString());
+                    ArrayAdapter reviewAdapter = new ArrayAdapter<String>(Spoonacular.this, android.R.layout.simple_list_item_1, new String[]{"Unfortunately you have exceeded the daily search quota","Please try again some other time"});
+                    recipeList.setAdapter(reviewAdapter);
+                    //error catching for exceeding daily search quota
+                    Toast.makeText(Spoonacular.this, "You have reached the daily search quota, please try again some other time", Toast.LENGTH_LONG).show();
                 }
             }
         );
@@ -357,6 +366,12 @@ public class Spoonacular extends AppCompatActivity {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     Log.i("the res is error:",error.toString());
+                    //pass error to be caught in fillListArray()
+                    JSONArray arry = new JSONArray();
+                    arry.put(error.toString());
+                    fillListArray(arry);
+                    //error catching for exceeding daily search quota
+                    Toast.makeText(Spoonacular.this, "You have reached the daily search quota, please try again some other time", Toast.LENGTH_LONG).show();
                 }
             }
         );

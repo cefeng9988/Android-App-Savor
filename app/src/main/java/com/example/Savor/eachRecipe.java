@@ -63,7 +63,7 @@ public class eachRecipe extends AppCompatActivity {
     private ImageView image;
     private Intent intent;
     public String[][] tuple;
-    private boolean spotifyBoolean;
+    private boolean spotifyBoolean, spotifyPause;
     private Context context;
     private int count;
     private int calories;
@@ -131,8 +131,10 @@ public class eachRecipe extends AppCompatActivity {
         recipeID = intent.getStringExtra("recipeID");
         //populate page with recipe data
         getRecipeData(recipeID);
-        //set Spotify boolean to be false
-        spotifyBoolean = false;
+        //set Spotify boolean to be true and spotifyPause to be false
+        //these booleans control playback functions like resume/pause
+        spotifyBoolean = true;
+        spotifyPause = false;
         //call helper function with recipeID to fill tuple with reviews from Firebase
         fillTuple(recipeID);
 
@@ -236,12 +238,6 @@ public class eachRecipe extends AppCompatActivity {
                             @Override
                             public void onConnected(SpotifyAppRemote spotifyAppRemote) {
                                 mSpotifyAppRemote = spotifyAppRemote;
-                                //toggles Spotify play and pause
-                                if(spotifyBoolean == false){
-                                    spotifyBoolean = true;
-                                }else{
-                                    spotifyBoolean = false;
-                                }
                                 Log.d("MainActivity", "Connected! Yay!");
                                 connected();
                             }
@@ -263,12 +259,17 @@ public class eachRecipe extends AppCompatActivity {
         //and pass that into getPlayerApi().play(String URI) below
 
         //obtain playlist URI
-        if(spotifyBoolean == true) {
+        if(spotifyBoolean == true && spotifyPause==false) {
             mSpotifyAppRemote.getPlayerApi().play(cuisineToURI(recipeCuisine)); //placeholder playlist URI: piano music playlist provided by spotify
-            Toast.makeText(getApplicationContext(), "Spotify Playing " + recipeCuisine + " Inspired Playlist", Toast.LENGTH_LONG).show();
-        }else {
+            spotifyBoolean = false;
+        }else if(spotifyPause==true && spotifyBoolean == false){
+            spotifyPause = false;
+            mSpotifyAppRemote.getPlayerApi().resume();
+            Toast.makeText(getApplicationContext(), "Spotify Resumed ", Toast.LENGTH_LONG).show();
+        }else{
             mSpotifyAppRemote.getPlayerApi().pause();
-            Toast.makeText(getApplicationContext(), "Spotify Paused " + recipeCuisine + " Inspired Playlist", Toast.LENGTH_LONG).show();
+            spotifyPause = true;
+            Toast.makeText(getApplicationContext(), "Spotify Paused ", Toast.LENGTH_LONG).show();
         }
 
         mSpotifyAppRemote.getPlayerApi()
@@ -281,8 +282,6 @@ public class eachRecipe extends AppCompatActivity {
                     }
                 });
     }
-
-
 
 // create menu
     @Override
@@ -571,84 +570,111 @@ public class eachRecipe extends AppCompatActivity {
         {
             case "african":
                 playlistURI = context.getString(R.string.african);
+                Toast.makeText(getApplicationContext(), "Spotify Playing African Inspired Playlist", Toast.LENGTH_LONG).show();
                 break;
             case "american":
                 playlistURI = context.getString(R.string.american);
+                Toast.makeText(getApplicationContext(), "Spotify Playing American Inspired Playlist", Toast.LENGTH_LONG).show();
                 break;
             case "british":
                 playlistURI = context.getString(R.string.british);
+                Toast.makeText(getApplicationContext(), "Spotify Playing British Inspired Playlist", Toast.LENGTH_LONG).show();
                 break;
             case "cajun":
                 playlistURI = context.getString(R.string.cajun);
+                Toast.makeText(getApplicationContext(), "Spotify Playing Cajun Inspired Playlist", Toast.LENGTH_LONG).show();
                 break;
             case "caribbean":
                 playlistURI = context.getString(R.string.caribbean);
+                Toast.makeText(getApplicationContext(), "Spotify Playing Caribbean Inspired Playlist", Toast.LENGTH_LONG).show();
                 break;
             case "chinese":
                 playlistURI = context.getString(R.string.chinese);
+                Toast.makeText(getApplicationContext(), "Spotify Playing Chinese Inspired Playlist", Toast.LENGTH_LONG).show();
                 break;
             case "eastern european":
                 playlistURI = context.getString(R.string.eastern_european);
+                Toast.makeText(getApplicationContext(), "Spotify Playing Eastern European Inspired Playlist", Toast.LENGTH_LONG).show();
                 break;
             case "european":
                 playlistURI = context.getString(R.string.european);
+                Toast.makeText(getApplicationContext(), "Spotify Playing European Inspired Playlist", Toast.LENGTH_LONG).show();
                 break;
             case "french":
                 playlistURI = context.getString(R.string.french);
+                Toast.makeText(getApplicationContext(), "Spotify Playing French Inspired Playlist", Toast.LENGTH_LONG).show();
                 break;
             case "german":
                 playlistURI = context.getString(R.string.german);
+                Toast.makeText(getApplicationContext(), "Spotify Playing German Inspired Playlist", Toast.LENGTH_LONG).show();
                 break;
             case "greek":
                 playlistURI = context.getString(R.string.greek);
+                Toast.makeText(getApplicationContext(), "Spotify Playing Greek Inspired Playlist", Toast.LENGTH_LONG).show();
                 break;
             case "indian":
                 playlistURI = context.getString(R.string.indian);
+                Toast.makeText(getApplicationContext(), "Spotify Playing Indian Inspired Playlist", Toast.LENGTH_LONG).show();
                 break;
             case "irish":
                 playlistURI = context.getString(R.string.irish);
+                Toast.makeText(getApplicationContext(), "Spotify Playing Irish Inspired Playlist", Toast.LENGTH_LONG).show();
                 break;
             case "italian":
                 playlistURI = context.getString(R.string.italian);
+                Toast.makeText(getApplicationContext(), "Spotify Playing Italian Inspired Playlist", Toast.LENGTH_LONG).show();
                 break;
             case "japanese":
                 playlistURI = context.getString(R.string.japanese);
+                Toast.makeText(getApplicationContext(), "Spotify Playing Japanese Inspired Playlist", Toast.LENGTH_LONG).show();
                 break;
             case "jewish":
                 playlistURI = context.getString(R.string.jewish);
+                Toast.makeText(getApplicationContext(), "Spotify Playing Jewish Inspired Playlist", Toast.LENGTH_LONG).show();
                 break;
             case "korean":
                 playlistURI = context.getString(R.string.korean);
+                Toast.makeText(getApplicationContext(), "Spotify Playing Korean Inspired Playlist", Toast.LENGTH_LONG).show();
                 break;
             case "latin american":
                 playlistURI = context.getString(R.string.latin_american);
+                Toast.makeText(getApplicationContext(), "Spotify Playing Latin American Inspired Playlist", Toast.LENGTH_LONG).show();
                 break;
             case "mediterranean":
                 playlistURI = context.getString(R.string.mediterranean);
+                Toast.makeText(getApplicationContext(), "Spotify Playing Mediterranean Inspired Playlist", Toast.LENGTH_LONG).show();
                 break;
             case "mexican":
                 playlistURI = context.getString(R.string.mexican);
+                Toast.makeText(getApplicationContext(), "Spotify Playing Mexican Inspired Playlist", Toast.LENGTH_LONG).show();
                 break;
             case "middle eastern":
                 playlistURI = context.getString(R.string.middle_eastern);
+                Toast.makeText(getApplicationContext(), "Spotify Playing Middle Eastern Inspired Playlist", Toast.LENGTH_LONG).show();
                 break;
             case "nordic":
                 playlistURI = context.getString(R.string.nordic);
+                Toast.makeText(getApplicationContext(), "Spotify Playing Nordic Inspired Playlist", Toast.LENGTH_LONG).show();
                 break;
             case "southern":
                 playlistURI = context.getString(R.string.southern);
+                Toast.makeText(getApplicationContext(), "Spotify Playing Southern Inspired Playlist", Toast.LENGTH_LONG).show();
                 break;
             case "spanish":
                 playlistURI = context.getString(R.string.spanish);
+                Toast.makeText(getApplicationContext(), "Spotify Playing Spanish Inspired Playlist", Toast.LENGTH_LONG).show();
                 break;
             case "thai":
                 playlistURI = context.getString(R.string.thai);
+                Toast.makeText(getApplicationContext(), "Spotify Playing Thai Inspired Playlist", Toast.LENGTH_LONG).show();
                 break;
             case "vietnamese":
                 playlistURI = context.getString(R.string.vietnamese);
+                Toast.makeText(getApplicationContext(), "Spotify Playing Vietnamese Inspired Playlist", Toast.LENGTH_LONG).show();
                 break;
             default: //default playlist is the American music playlist
                 playlistURI = context.getString(R.string.generic);
+                Toast.makeText(getApplicationContext(), "Spotify Playing Default Playlist", Toast.LENGTH_LONG).show();
                 break;
         }
         return playlistURI;
