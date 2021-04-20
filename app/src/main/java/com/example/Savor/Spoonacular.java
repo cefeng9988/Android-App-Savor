@@ -312,10 +312,10 @@ public class Spoonacular extends AppCompatActivity {
 
     //Helper function, get in recipe data with query words
     public void getRecipeByQuery(final String query) {
-        String URL =  "https://api.spoonacular.com/recipes/complexSearch?apiKey=f80bf47afa2549c2bad353d39505fe4c&instructionsRequired =true&number=20&query=" + query;
+        String URL =  "https://api.spoonacular.com/recipes/complexSearch?apiKey=837445f12112425fa612c2396c132c9d&instructionsRequired =true&number=20&query=" + query;
         //check if user is Vegan
         if(vegan.equals("True")){
-            URL = "https://api.spoonacular.com/recipes/complexSearch?apiKey=f80bf47afa2549c2bad353d39505fe4c&instructionsRequired =true&number=20&diet=vegan&query=" + query;
+            URL = "https://api.spoonacular.com/recipes/complexSearch?apiKey=837445f12112425fa612c2396c132c9d&instructionsRequired =true&number=20&diet=vegan&query=" + query;
         }
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
@@ -349,7 +349,7 @@ public class Spoonacular extends AppCompatActivity {
     public void getRecipeByIngredients(String pantry) {
         ingredients="";
         Log.i("TAG", "Pantry: "+pantry);
-        String URL = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=f80bf47afa2549c2bad353d39505fe4c&ingredients="+pantry;
+        String URL = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=837445f12112425fa612c2396c132c9d&ingredients="+pantry;
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         // grabs json object from api
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(

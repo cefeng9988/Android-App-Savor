@@ -462,7 +462,7 @@ public class eachRecipe extends AppCompatActivity {
         //shares global ingredients, used to store ingredients from API
         ingredients = "";
 
-        String URL = "https://api.spoonacular.com/recipes/" + recipeId + "/information?apiKey=f80bf47afa2549c2bad353d39505fe4c";
+        String URL = "https://api.spoonacular.com/recipes/" + recipeId + "/information?apiKey=837445f12112425fa612c2396c132c9d";
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         // grabs json object from api
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
